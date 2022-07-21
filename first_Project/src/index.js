@@ -8,30 +8,32 @@ app.listen(3033)// porta da api
 // var 
 const {v4: uuidV4} = require ("uuid") // gera ids aleatorios(V4) -- pesquise para saber sobre as outras versoes 
 const customers = [];
-
+/*========================================================================================================*/
+/*                              Requisitos e  Regras de Negocio                                           */
+/*========================================================================================================*/
 /**
  * --- Requisitos ---
- * deve ser possivel criar uma conta 
- * deve ser possivel buscar o extrato bancario do cliente
- * deve ser possivel realizar um deposito 
- * deve ser possivel buscar o extrato bancario do clente por data 
- * deve ser possivel atualizar dados da conta do cliente 
- * deve ser possivel obter dados da conta do cliente 
- * deve ser possivel deletar uma conta 
- */
+ *[x] deve ser possivel criar uma conta 
+ *[x] deve ser possivel buscar o extrato bancario do cliente
+ *[x] deve ser possivel realizar um deposito 
+ *[x] deve ser possivel realizar um saque
+ *[] deve ser possivel buscar o extrato bancario do clente por data 
+ *[] deve ser possivel atualizar dados da conta do cliente 
+ *[] deve ser possivel obter dados da conta do cliente 
+ *[] deve ser possivel deletar uma conta 
 
-/**
  * --- Regras de Negocio ---
- * nao deve ser possivel cadastrar uma conta com cpf ja existente
- * nao deve ser possivel fazer deposito em uma conta que nao existe 
- * nao deve ser possivel fazer saque me uma conta nao existente
- * nao deve ser possivel excluir uma conta nao existente 
- * nao deve ser possivel fazer um saque quando o saldo for insuficiente 
+ * [x]nao deve ser possivel cadastrar uma conta com cpf ja existente
+ * [x]nao deve ser possivel fazer deposito em uma conta que nao existe 
+ * [x]nao deve ser possivel fazer saque me uma conta nao existente
+ * []nao deve ser possivel excluir uma conta nao existente 
+ * []nao deve ser possivel fazer um saque quando o saldo for insuficiente 
  */
 
 
-//middleware
-//app.use(verifiyIfExistsAccountCpf); // usado para quando todas as requisicoes usarem o meddlewares
+/*========================================================================================================*/
+/*                              Funcoes para funcionamento da API                                         */
+/*========================================================================================================*/
 function verifiyIfExistsAccountCpf(request, response, next){
     const {cpf } = request.headers;
     // find encontra a var passada na rota 
@@ -43,6 +45,20 @@ function verifiyIfExistsAccountCpf(request, response, next){
 
     request.customer = customer // metodo usado para declarar a variavel que esta na rota statement 
     return next();
+}
+
+function getBalance(statement) { 
+    const balace = statement.reduce((acc,operation) => { // -- operation acesso o objeto do statement -- foi passado como parametro 
+        // acesso o campo type no statement e verifico se e credito 
+        if(operation.type === 'credit'){ // if a operacao for == a credito 
+            return acc + operation.amount; // pego o valor depositado e somo com o saldo atual da conta 
+        }
+        else{ // se o type == debit -- pego o valor do saque menos o saldo atual 
+            return acc - operation.amount;
+        }
+    },0) // insiro o valor que quero iniciar o balance 
+    //OBS: a var balance foi definida como zero 
+    return balace
 }
 
 /*============================================================================================*/
@@ -84,14 +100,33 @@ app.post("/deposit", verifiyIfExistsAccountCpf, (request, response)=>{
 
     const {description, amount} = request.body; // parametro para receber dados 
 
-    const statementOperation = {
+    const statementOperation = { 
         description, 
         amount, 
         created_at: new Date(), // data do deposito 
         type: "credit" //credit if deposit -- debit if saque
     };
     customer.statement.push(statementOperation); // referencio ao id da requisicao statement 
-
     return response.status(201).send();
+})
 
+app.post("/withdraw", verifiyIfExistsAccountCpf, (request,response) => {
+    const {amount} = request.body // recebo o valor do saque 
+    const {customer} = request; // fucao middle 
+    // chamando funcao e retorna o saldo em conta  
+    const balance = getBalance(customer.statement)
+    //verifico se o saldo em conta e menor que o saque
+    if(balance < amount){
+        return response.status(400).json({Error:"Insufficient Founds!"});
+    }
+
+    const statementOperation = {
+        amount, 
+        created_at: new Date(), // data do deposito 
+        type: "debit" //credit if deposit -- debit if saque
+    }; // crio novamente o objeto e passo ele para ser adicionado a lista 
+
+    customer.statement.push(statementOperation); //chamo a requisicao statement e mando os dados pelo request
+    return response.status(201).send();
+    
 })
