@@ -78,3 +78,20 @@ app.get("/statement", verifiyIfExistsAccountCpf, (request, response) => {
     const { customer } = request; // uso da referencia feita na funcao middle em relacao a variavel customers 
     return response.json(customer.statement);
 })
+
+app.post("/deposit", verifiyIfExistsAccountCpf, (request, response)=>{
+    const { customer } = request; // referencia feita a var customers na middle 
+
+    const {description, amount} = request.body; // parametro para receber dados 
+
+    const statementOperation = {
+        description, 
+        amount, 
+        created_at: new Date(), // data do deposito 
+        type: "credit" //credit if deposit -- debit if saque
+    };
+    customer.statement.push(statementOperation); // referencio ao id da requisicao statement 
+
+    return response.status(201).send();
+
+})
