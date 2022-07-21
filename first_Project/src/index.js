@@ -64,15 +64,13 @@ app.post("/account", (request, response)=> {
 }); // usando metodo de requisicao post 
 
 
-app.get("/statement/:cpf", (request, response) => {
-    const {cpf } = request.params;
+app.get("/statement", (request, response) => {
+    const {cpf } = request.headers;
     // find encontra a var passada na rota 
     const customer = customers.find((customer) => customer.cpf === cpf);
 
     if(!customer){ // verifico se existem um cpf
         return response.status(400).json({error: "Customer not fald!"})
     }
-    
-
     return response.json(customer.statement);
 })
