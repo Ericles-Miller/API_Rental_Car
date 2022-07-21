@@ -9,7 +9,6 @@ app.listen(3033)// porta da api
 const {v4: uuidV4} = require ("uuid") // gera ids aleatorios(V4) -- pesquise para saber sobre as outras versoes 
 const customers = [];
 
-
 /**
  * --- Requisitos ---
  * deve ser possivel criar uma conta 
@@ -21,7 +20,6 @@ const customers = [];
  * deve ser possivel deletar uma conta 
  */
 
-
 /**
  * --- Regras de Negocio ---
  * nao deve ser possivel cadastrar uma conta com cpf ja existente
@@ -32,12 +30,24 @@ const customers = [];
  */
 
 
-/**
- * CPF- String 
- * nome - string 
- * id - uuid -- unique universe identifier 
- * statement [] 
- */
+//middleware
+//app.use(verifiyIfExistsAccountCpf); // usado para quando todas as requisicoes usarem o meddlewares
+function verifiyIfExistsAccountCpf(request, response, next){
+    const {cpf } = request.headers;
+    // find encontra a var passada na rota 
+    const customer = customers.find((customer) => customer.cpf === cpf);
+
+    if(!customer){ // verifico se existem um cpf
+        return response.status(400).json({error: "Customer not fald!"})
+    }
+
+    request.customer = customer // metodo usado para declarar a variavel que esta na rota statement 
+    return next();
+}
+
+/*============================================================================================*/
+/*                                 Rotas e suas requisicoes                                   */ 
+/*============================================================================================*/
 app.post("/account", (request, response)=> {
     // conceito de desestruturacao -- {} 
     const {cpf, name}  = request.body; // parametro para receber o dados -- request body 
@@ -64,13 +74,7 @@ app.post("/account", (request, response)=> {
 }); // usando metodo de requisicao post 
 
 
-app.get("/statement", (request, response) => {
-    const {cpf } = request.headers;
-    // find encontra a var passada na rota 
-    const customer = customers.find((customer) => customer.cpf === cpf);
-
-    if(!customer){ // verifico se existem um cpf
-        return response.status(400).json({error: "Customer not fald!"})
-    }
+app.get("/statement", verifiyIfExistsAccountCpf, (request, response) => {
+    const { customer } = request; // uso da referencia feita na funcao middle em relacao a variavel customers 
     return response.json(customer.statement);
 })
