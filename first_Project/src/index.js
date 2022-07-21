@@ -56,9 +56,23 @@ app.post("/account", (request, response)=> {
         id: uuidV4(), 
         name,
         cpf,
-        statment: []
+        statement: []
     });
     // metodo send nao returna nada 
     // status -- http code para created -- visualizar notion 
     return response.status(201).send();
 }); // usando metodo de requisicao post 
+
+
+app.get("/statement/:cpf", (request, response) => {
+    const {cpf } = request.params;
+    // find encontra a var passada na rota 
+    const customer = customers.find((customer) => customer.cpf === cpf);
+
+    if(!customer){ // verifico se existem um cpf
+        return response.status(400).json({error: "Customer not fald!"})
+    }
+    
+
+    return response.json(customer.statement);
+})
