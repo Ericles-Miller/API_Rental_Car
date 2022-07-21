@@ -46,7 +46,7 @@ function verifiyIfExistsAccountCpf(request, response, next){
     request.customer = customer // metodo usado para declarar a variavel que esta na rota statement 
     return next();
 }
-
+//funcao para add saque e deposito 
 function getBalance(statement) { 
     const balace = statement.reduce((acc,operation) => { // -- operation acesso o objeto do statement -- foi passado como parametro 
         // acesso o campo type no statement e verifico se e credito 
@@ -129,4 +129,22 @@ app.post("/withdraw", verifiyIfExistsAccountCpf, (request,response) => {
     customer.statement.push(statementOperation); //chamo a requisicao statement e mando os dados pelo request
     return response.status(201).send();
     
+})
+
+app.get("/statement/date",verifiyIfExistsAccountCpf, (request, response) =>{
+    const {customer} = request; // request relacionado ao cpf 
+    const {date} = request.query; // passo a data por uma query 
+
+    const dateFormat = new Date(date + " 00:00"); // pego a data e defino com 00 horas 
+    // filtro a data referente ao saque 
+    // acesso o customer relacionado ao cpf do usuario 
+    // feito isso acesso com a data passada via query(date) e comparo com a string do obejto 
+    //data e vejo se sao iguais ou existem 
+    // passo a var acima como parametro 
+    const statement = customer.statement.filter((statement) =>
+        statement.created_at.toDateString() === new Date(dateFormat).toDateString()// transforma data em string
+    );
+
+    return response.json(customer.statement);// mando os dados para o onjeto 
+
 })
