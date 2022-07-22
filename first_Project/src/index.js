@@ -17,7 +17,7 @@ const customers = [];
  *[x] deve ser possivel buscar o extrato bancario do cliente
  *[x] deve ser possivel realizar um deposito 
  *[x] deve ser possivel realizar um saque
- *[] deve ser possivel buscar o extrato bancario do clente por data 
+ *[x] deve ser possivel buscar o extrato bancario do clente por data 
  *[] deve ser possivel atualizar dados da conta do cliente 
  *[] deve ser possivel obter dados da conta do cliente 
  *[] deve ser possivel deletar uma conta 
@@ -46,7 +46,7 @@ function verifiyIfExistsAccountCpf(request, response, next){
     request.customer = customer // metodo usado para declarar a variavel que esta na rota statement 
     return next();
 }
-
+//funcao para add saque e deposito 
 function getBalance(statement) { 
     const balace = statement.reduce((acc,operation) => { // -- operation acesso o objeto do statement -- foi passado como parametro 
         // acesso o campo type no statement e verifico se e credito 
@@ -89,11 +89,10 @@ app.post("/account", (request, response)=> {
     return response.status(201).send();
 }); // usando metodo de requisicao post 
 
-
 app.get("/statement", verifiyIfExistsAccountCpf, (request, response) => {
     const { customer } = request; // uso da referencia feita na funcao middle em relacao a variavel customers 
     return response.json(customer.statement);
-})
+});
 
 app.post("/deposit", verifiyIfExistsAccountCpf, (request, response)=>{
     const { customer } = request; // referencia feita a var customers na middle 
@@ -108,7 +107,7 @@ app.post("/deposit", verifiyIfExistsAccountCpf, (request, response)=>{
     };
     customer.statement.push(statementOperation); // referencio ao id da requisicao statement 
     return response.status(201).send();
-})
+});
 
 app.post("/withdraw", verifiyIfExistsAccountCpf, (request,response) => {
     const {amount} = request.body // recebo o valor do saque 
@@ -129,4 +128,36 @@ app.post("/withdraw", verifiyIfExistsAccountCpf, (request,response) => {
     customer.statement.push(statementOperation); //chamo a requisicao statement e mando os dados pelo request
     return response.status(201).send();
     
+});
+
+app.get("/statement/date",verifiyIfExistsAccountCpf, (request, response) =>{
+    const {customer} = request; // request relacionado ao cpf 
+    const {date} = request.query; // passo a data por uma query 
+
+    const dateFormat = new Date(date + " 00:00"); // pego a data e defino com 00 horas 
+    // filtro a data referente ao saque 
+    // acesso o customer relacionado ao cpf do usuario 
+    // feito isso acesso com a data passada via query(date) e comparo com a string do obejto 
+    //data e vejo se sao iguais ou existem 
+    // passo a var acima como parametro 
+    const statement = customer.statement.filter((statement) =>
+        statement.created_at.toDateString() === new Date(dateFormat).toDateString()// transforma data em string
+    );
+
+    return response.json(customer.statement);// mando os dados para o onjeto 
+});
+
+app.put("/account", verifiyIfExistsAccountCpf, (request, response)=>{
+    const {name} = request.body;
+    const {customer}  = request;
+
+    customer.name = name;
+
+    return response.status(201).send();
+});
+
+app.get("/account", verifiyIfExistsAccountCpf, (request,response)=>{
+    const {customer} = request;
+
+    return response.json(customer);
 })
