@@ -7,7 +7,7 @@ app.listen(3033)// porta da api
 
 // var 
 const {v4: uuidV4} = require ("uuid") // gera ids aleatorios(V4) -- pesquise para saber sobre as outras versoes 
-const customers = [];
+const customers = []; // -- Var global
 /*========================================================================================================*/
 /*                              Requisitos e  Regras de Negocio                                           */
 /*========================================================================================================*/
@@ -18,16 +18,16 @@ const customers = [];
  *[x] deve ser possivel realizar um deposito 
  *[x] deve ser possivel realizar um saque
  *[x] deve ser possivel buscar o extrato bancario do clente por data 
- *[] deve ser possivel atualizar dados da conta do cliente 
- *[] deve ser possivel obter dados da conta do cliente 
- *[] deve ser possivel deletar uma conta 
+ *[x] deve ser possivel atualizar dados da conta do cliente 
+ *[x] deve ser possivel obter dados da conta do cliente 
+ *[x] deve ser possivel deletar uma conta 
+ *[x] deve ser possivel fazer o balanco 
 
  * --- Regras de Negocio ---
  * [x]nao deve ser possivel cadastrar uma conta com cpf ja existente
  * [x]nao deve ser possivel fazer deposito em uma conta que nao existe 
- * [x]nao deve ser possivel fazer saque me uma conta nao existente
- * []nao deve ser possivel excluir uma conta nao existente 
- * []nao deve ser possivel fazer um saque quando o saldo for insuficiente 
+ * [x]nao deve ser possivel fazer saque em uma conta nao existente
+ * [x]nao deve ser possivel excluir uma conta nao existente 
  */
 
 
@@ -91,7 +91,7 @@ app.post("/account", (request, response)=> {
 
 app.get("/statement", verifiyIfExistsAccountCpf, (request, response) => {
     const { customer } = request; // uso da referencia feita na funcao middle em relacao a variavel customers 
-    return response.json(customer.statement);
+    return response.json(customer.statement); // le o objeto do json statment 
 });
 
 app.post("/deposit", verifiyIfExistsAccountCpf, (request, response)=>{
@@ -105,7 +105,7 @@ app.post("/deposit", verifiyIfExistsAccountCpf, (request, response)=>{
         created_at: new Date(), // data do deposito 
         type: "credit" //credit if deposit -- debit if saque
     };
-    customer.statement.push(statementOperation); // referencio ao id da requisicao statement 
+    customer.statement.push(statementOperation); // faco append para dicionario statement 
     return response.status(201).send();
 });
 
@@ -118,16 +118,14 @@ app.post("/withdraw", verifiyIfExistsAccountCpf, (request,response) => {
     if(balance < amount){
         return response.status(400).json({Error:"Insufficient Founds!"});
     }
-
     const statementOperation = {
         amount, 
         created_at: new Date(), // data do deposito 
         type: "debit" //credit if deposit -- debit if saque
     }; // crio novamente o objeto e passo ele para ser adicionado a lista 
 
-    customer.statement.push(statementOperation); //chamo a requisicao statement e mando os dados pelo request
+    customer.statement.push(statementOperation); //faco o append para o objeto statment 
     return response.status(201).send();
-    
 });
 
 app.get("/statement/date",verifiyIfExistsAccountCpf, (request, response) =>{
@@ -160,4 +158,28 @@ app.get("/account", verifiyIfExistsAccountCpf, (request,response)=>{
     const {customer} = request;
 
     return response.json(customer);
+});
+
+app.delete("/account", verifiyIfExistsAccountCpf, (request, response) => {
+    const {customer} = request;
+
+    //splice -- O método splice() altera o conteúdo de uma lista, 
+    //adicionando novos elementos enquanto remove elementos antigos.
+    //doc -- https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+    customers.splice(customer,1) // remove a posicao do customer 1(deletCount)
+    // tome cuidado [e de clientes nao cliente 
+    return response.status(200).json(customers)
+});
+
+app.get("/balance", verifiyIfExistsAccountCpf, (request,response) => {
+    const {customer} = request;
+    const balance = getBalance(customer.statement); // mando os dados do objeto statement refetente ao cpf passado 
+
+    return response.json(balance);// retorno os dados do cliente 
 })
+
+/*
+Ericles Miller -- 13098812605
+
+Adelita Dias   -- 40276430620 
+*/ 
