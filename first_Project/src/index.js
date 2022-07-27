@@ -171,15 +171,10 @@ app.delete("/account", verifiyIfExistsAccountCpf, (request, response) => {
     return response.status(200).json(customers)
 });
 
-app.get("/balance", verifiyIfExistsAccountCpf, (request,response) => {
+app.get("/balance", verifiyIfExistsAccountCpf, (request,response) => { // saldo em conta em outras palavras 
     const {customer} = request;
     const balance = getBalance(customer.statement); // mando os dados do objeto statement refetente ao cpf passado 
 
     return response.json(balance);// retorno os dados do cliente 
 })
 
-/*
-Ericles Miller -- 13098812605
-
-Adelita Dias   -- 40276430620 
-*/ 
