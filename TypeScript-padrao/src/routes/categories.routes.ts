@@ -13,6 +13,7 @@ const categoriesRepository = new CategoriesRepository();
 categoriesRoutes.post("/", (request, response) => {
     const { name, description } = request.body;
 
+    //findByName [e o nome da funcao, nao confunda como o metodo de find()
     const categoryAlreadyExists = categoriesRepository.findByName(name);
     if(categoryAlreadyExists) {
         return response.status(400).json({error:"Category already exists!"});
@@ -25,6 +26,6 @@ categoriesRoutes.post("/", (request, response) => {
 categoriesRoutes.get('/', (request,response) =>{
     const all = categoriesRepository.list(); // chamo a funcao list da classe categoriesRepository 
     return response.json(all); // retorna o arquivo json de categories 
-})
+});
 
 export { categoriesRoutes }; // exporto para poder referenciar e usar em outros codigos
