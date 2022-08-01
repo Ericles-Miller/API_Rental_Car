@@ -30,6 +30,12 @@ class CategoriesRepository {
     list(): Category[] { // parametro que sera retornado 
         return this.categories
     }
+
+    findByName(name:string):Category {
+        //categories -- list of class category -- set up 
+        const category = this.categories.find(category => category.name === name);// check if exists 
+        return category;
+    }
 }
 
 export { CategoriesRepository };
