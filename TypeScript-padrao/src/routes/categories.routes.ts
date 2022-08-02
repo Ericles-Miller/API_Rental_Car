@@ -4,6 +4,7 @@ import { response, Router } from 'express'; //importo da biblioteca express;
 import { v4 as uuid4 } from 'uuid';
 import { Category } from '../model/category';
 import { CategoriesRepository } from '../repositories/CategoriesRepository';
+import { CreateCategoryService } from '../services/CreateCategoryService';
 
 // importando car de rotas;
 const categoriesRoutes = Router();
@@ -12,14 +13,14 @@ const categoriesRepository = new CategoriesRepository();
 
 categoriesRoutes.post("/", (request, response) => {
     const { name, description } = request.body;
+    /**
+     * essa definicao abaixo foi feita por causa do constructor 
+     * nela passamos como parametro a class do repositorio como 
+     * private. essa declaracao esta em CreateCategoryService.ts
+     */
+    const createCategoryService = new CreateCategoryService(categoriesRepository); // class do repositorio declarada acima 
 
-    //findByName [e o nome da funcao, nao confunda como o metodo de find()
-    const categoryAlreadyExists = categoriesRepository.findByName(name);
-    if(categoryAlreadyExists) {
-        return response.status(400).json({error:"Category already exists!"});
-    }
-    
-    categoriesRepository.create({name, description});
+    createCategoryService.execute({name,description});
     return response.status(201).send();
 });
 
