@@ -4,7 +4,7 @@ import { response, Router } from 'express'; //importo da biblioteca express;
 import { v4 as uuid4 } from 'uuid';
 import { Category } from '../modules/car/model/category';
 import { CategoriesRepository } from '../modules/car/repositories/CategoriesRepository';
-import { CreateCategoryService } from '../modules/car/services/CreateCategoryService';
+import { createCategorycontroller } from '../UseCases/createCategory';
 
 // importando car de rotas;
 const categoriesRoutes = Router();
@@ -12,16 +12,11 @@ const categoriesRepository = new CategoriesRepository();
 
 
 categoriesRoutes.post("/", (request, response) => {
-    const { name, description } = request.body;
-    /**
-     * essa definicao abaixo foi feita por causa do constructor 
-     * nela passamos como parametro a class do repositorio como 
-     * private. essa declaracao esta em CreateCategoryService.ts
+    /**chamo a nova classe que criei no arquivo createCategorycontroller 
+     * e em seguida instancio a sua funcao handle passando os parametros 
+     * request e response como foi definido 
      */
-    const createCategoryService = new CreateCategoryService(categoriesRepository); // class do repositorio declarada acima 
-
-    createCategoryService.execute({name,description});
-    return response.status(201).send();
+    return createCategorycontroller.handle(request,response);
 });
 
 categoriesRoutes.get('/', (request,response) =>{
