@@ -1,4 +1,4 @@
-import { CategoriesRepository } from "../repositories/CategoriesRepository";
+import { CategoriesRepository } from "../../modules/car/repositories/CategoriesRepository";
 
 
 
@@ -12,7 +12,7 @@ interface IRequest {
  * vamos inverver os papeis, iremos chamar dentro da classe abaixo a classe definida no nosso
  * arquivo de repositorio.
  */
-class CreateCategoryService {
+class CreateCategoryUseCase {
     constructor(private categoriesRepository: CategoriesRepository) {}
 
     execute({name, description}: IRequest): void { // no momento nao iremos retornar nada 
@@ -27,4 +27,4 @@ class CreateCategoryService {
 }
 
 
-export {CreateCategoryService};
+export {CreateCategoryUseCase};
