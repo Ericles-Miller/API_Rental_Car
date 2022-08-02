@@ -2,9 +2,9 @@ import { response, Router } from 'express'; //importo da biblioteca express;
 
 // importando lybralys API; 
 import { v4 as uuid4 } from 'uuid';
-import { Category } from '../model/category';
-import { CategoriesRepository } from '../repositories/CategoriesRepository';
-import { CreateCategoryService } from '../services/CreateCategoryService';
+import { Category } from '../modules/car/model/category';
+import { CategoriesRepository } from '../modules/car/repositories/CategoriesRepository';
+import { CreateCategoryService } from '../modules/car/services/CreateCategoryService';
 
 // importando car de rotas;
 const categoriesRoutes = Router();
