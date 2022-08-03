@@ -5,9 +5,23 @@ import { ICategoriesRepository,ICreatedCategoryDTO } from "./ICategoriesReposito
 class CategoriesRepository implements ICategoriesRepository{
     private categories: Category []; // relaciono a classe category 
 
-    constructor() {
+    //Singleton 
+    private static INSTANCE: CategoriesRepository;
+
+    // a partir de agora nosso constructor ele sera privado 
+    private constructor() {
         //metodo this serve para acessar metodos do construct 
         this.categories = []; // inicialmente crio um array vazio
+    }
+
+    //crio um metodo publico agora 
+    // tem como objetivo criar ou repassar uma instancia 
+    public static getInstance(): CategoriesRepository {
+        /** se o nao existir o CategoriesRepository ele ira criar um new */
+        if(!CategoriesRepository.INSTANCE){
+            CategoriesRepository.INSTANCE = new CategoriesRepository();
+        }
+        return CategoriesRepository.INSTANCE;
     }
 
     create({description, name} : ICreatedCategoryDTO) {

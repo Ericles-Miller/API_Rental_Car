@@ -1,15 +1,9 @@
-import { response, Router } from 'express'; //importo da biblioteca express;
-
-// importando lybralys API; 
-import { v4 as uuid4 } from 'uuid';
-import { Category } from '../modules/car/model/category';
-import { CategoriesRepository } from '../modules/car/repositories/CategoriesRepository';
-import { createCategorycontroller } from '../UseCases/createCategory';
+import { Router } from 'express'; //importo da biblioteca express;
+import { createCategorycontroller } from '../modules/car/UseCases/createCategory';
+import { listCategoriesController } from '../modules/car/UseCases/listCategories';
 
 // importando car de rotas;
 const categoriesRoutes = Router();
-const categoriesRepository = new CategoriesRepository();
-
 
 categoriesRoutes.post("/", (request, response) => {
     /**chamo a nova classe que criei no arquivo createCategorycontroller 
@@ -20,8 +14,7 @@ categoriesRoutes.post("/", (request, response) => {
 });
 
 categoriesRoutes.get('/', (request,response) =>{
-    const all = categoriesRepository.list(); // chamo a funcao list da classe categoriesRepository 
-    return response.json(all); // retorna o arquivo json de categories 
+    return listCategoriesController.handle(request,response);
 });
 
 export { categoriesRoutes }; // exporto para poder referenciar e usar em outros codigos
