@@ -1,4 +1,4 @@
-import { CategoriesRepository } from "../../modules/car/repositories/CategoriesRepository";
+import { CategoriesRepository } from "../../repositories/CategoriesRepository";
 
 
 
