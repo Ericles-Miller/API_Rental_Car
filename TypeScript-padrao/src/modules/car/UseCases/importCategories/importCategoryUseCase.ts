@@ -60,4 +60,4 @@ class ImportCategoryUseCase {
     };
 }
 
-export { ImportCategoryUseCase}; 
+export { ImportCategoryUseCase }; 

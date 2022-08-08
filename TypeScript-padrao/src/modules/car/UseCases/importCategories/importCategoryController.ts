@@ -12,5 +12,5 @@ class ImportCategoryController {
     }
 }
 
-export {ImportCategoryController};
+export { ImportCategoryController };
 
