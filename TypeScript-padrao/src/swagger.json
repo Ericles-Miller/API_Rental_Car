@@ -9,8 +9,9 @@
         }
     },
     "paths": {
-        "categories": {
+        "/categories": {
             "post": {
+                "tags": ["Category"],
                 "summary": "create a category",
                 "description": "create a new category",
                 "requestBody": {
@@ -20,17 +21,46 @@
                                 "type":"object",
                                 "properties": {
                                     "name": {
-                                        "string": {
-                                            "name":{
-                                                "type": "string"
-                                            },
-                                            "description":{
-                                                "type":"string"
-                                            }
+                                            "type": "string"
+                                    },
+                                    "description":{
+                                        "type":"string"
+                                    }
+                                },
+                                "exemple": {
+                                    "name":"Category name sample ",
+                                    "description": "Category description sample"
+                                }
+                            }
+                        }
+                    }
+                }, 
+                "responses": {
+                        "201": {
+                            "description": "Created"
+                        },
+                        "500":{
+                             "description": "Category already exists"
+                        }
+                }
+            },
+            "get": {
+                "tags": ["Category"],
+                "summary":"list all categories",
+                "description": "list all categories",
+                "responses": {
+                    "200":{
+                        "description": "Sucess",
+                        "constent":{
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type":"string"
                                         },
-                                        "exemple": {
-                                            "name":"Category name sample ",
-                                            "description": "Category description sample"
+                                        "description": {
+                                            "type": "string"
                                         }
                                     }
                                 }
@@ -38,15 +68,11 @@
                         }
                     }
                 }
-            },
-            "response": {
-                "201": {
-                    "description": "Created"
-                },
-                "500":{
-                    "description": "Category already exists"
-                }
             }
+                        
         }
     }
+                        
 }
+            
+        
