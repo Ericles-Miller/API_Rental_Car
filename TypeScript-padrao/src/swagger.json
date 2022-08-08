@@ -1,0 +1,11 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title":" Rentalx Documentation",
+        "description" : "This is an Api Rent",
+        "version": "1.0.0",
+        "contact": { 
+            "email": "ericlesmiller.eng.sis@gmail.com"
+        }
+    }
+}
