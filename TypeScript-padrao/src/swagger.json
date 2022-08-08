@@ -7,5 +7,46 @@
         "contact": { 
             "email": "ericlesmiller.eng.sis@gmail.com"
         }
+    },
+    "paths": {
+        "categories": {
+            "post": {
+                "summary": "create a category",
+                "description": "create a new category",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type":"object",
+                                "properties": {
+                                    "name": {
+                                        "string": {
+                                            "name":{
+                                                "type": "string"
+                                            },
+                                            "description":{
+                                                "type":"string"
+                                            }
+                                        },
+                                        "exemple": {
+                                            "name":"Category name sample ",
+                                            "description": "Category description sample"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "response": {
+                "201": {
+                    "description": "Created"
+                },
+                "500":{
+                    "description": "Category already exists"
+                }
+            }
+        }
     }
 }
