@@ -3,7 +3,7 @@ import { CreateCategoryController } from "./CreateCategoryController";
 import { CreateCategoryUseCase } from "./CreateCategoryUseCase";
 
 export default(): CreateCategoryController => {
-const categoryRepository = new CategoriesRepository();
+const categoryRepository = null
 
 const createCategoryUseCase = new CreateCategoryUseCase(categoryRepository);
 

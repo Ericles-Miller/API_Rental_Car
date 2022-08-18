@@ -4,6 +4,7 @@
     "username":"sa",
     "password":"@18er0821",
     "database": "rentex",
+    "entities": ["./src/modules/**/entities/*.ts"],
     "migrations":["./src/database/migrations/*.ts"],
     "extra":{
         "trustServerCertificate": true
