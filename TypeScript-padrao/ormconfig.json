@@ -1,7 +1,14 @@
 {
-    "type":"postgress",
+    "type":"mssql",
     "host": "localhost",
-    "username":"",
-    "passeord":"",
-    "database": "rentex"
+    "username":"sa",
+    "password":"@18er0821",
+    "database": "rentex",
+    "migrations":["./src/database/migrations/*.ts"],
+    "extra":{
+        "trustServerCertificate": true
+    },
+    "cli":{
+        "migrationsDir":"./src/database/migrations"
+    }
 }
