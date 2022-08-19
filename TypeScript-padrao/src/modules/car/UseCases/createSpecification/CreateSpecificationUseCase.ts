@@ -1,3 +1,4 @@
+import { inject, injectable } from "tsyringe";
 import { ISpecificationRepository } from "../../repositories/ISpecificationRepository";
 
 
@@ -6,9 +7,12 @@ interface IRequest {
     description: string
 }
 
-class CreateSpecificationUseCase {
 
-    constructor (private specificationsRespository: ISpecificationRepository){
+@injectable()
+class CreateSpecificationUseCase {
+    constructor (
+        @inject("SpecificationRepository")
+        private specificationsRespository: ISpecificationRepository){
     }
 
     execute({description, name}:IRequest):void {

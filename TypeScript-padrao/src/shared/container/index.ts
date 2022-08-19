@@ -1,6 +1,8 @@
 import {container} from 'tsyringe';
 import { ICategoriesRepository } from '../../modules/car/repositories/ICategoriesRepository';
 import { CategoriesRepository } from '../../modules/car/repositories/implementations/CategoriesRepository';
+import { SpecificationsRepository } from '../../modules/car/repositories/implementations/SpecificationRespository';
+import { ISpecificationRepository } from '../../modules/car/repositories/ISpecificationRepository';
 
 
 
@@ -13,7 +15,9 @@ container.registerSingleton<ICategoriesRepository>(
     CategoriesRepository
 );
 
-
-
+container.registerSingleton<ISpecificationRepository>(
+    "SpecificationRepository",
+    SpecificationsRepository
+);
 
 

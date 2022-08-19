@@ -1,7 +1,9 @@
 import { Router } from 'express'; //importo da biblioteca express;
 import { CreateCategoryController }  from '../modules/car/UseCases/createCategory/CreateCategoryController';
-import { listCategoriesController } from '../modules/car/UseCases/listCategories';
-import { importCategoryController } from '../modules/car/UseCases/importCategories';
+import { ListCategoriesController } from '../modules/car/UseCases/listCategories/ListCategoriesController';
+import { ImportCategoryController } from '../modules/car/UseCases/importCategories/importCategoryController';
+
+
 import multer from 'multer';
 // importando car de rotas;
 const categoriesRoutes = Router();
@@ -12,16 +14,11 @@ const upload = multer({
 });
 
 const createCategoryController = new CreateCategoryController();
-categoriesRoutes.post("/", (request, response) => {
-    return createCategoryController.handle(request,response);
-});
+const importCategoryController = new ImportCategoryController();
+const listCategoriesController = new ListCategoriesController();
 
-categoriesRoutes.get('/', (request,response) =>{
-    return listCategoriesController.handle(request,response);
-});
-
-categoriesRoutes.post("/import", upload.single("file"), (request, response) =>{
-    return importCategoryController.handle(request,response);
-});
+categoriesRoutes.post("/", createCategoryController.handle);
+categoriesRoutes.get('/', listCategoriesController.handle);
+categoriesRoutes.post("/import", upload.single("file"), importCategoryController.handle);
 
 export { categoriesRoutes }; // exporto para poder referenciar e usar em outros codigos
