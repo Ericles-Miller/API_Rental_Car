@@ -1,9 +1,8 @@
 import { Router } from 'express'; //importo da biblioteca express;
-import  createCategorycontroller  from '../modules/car/UseCases/createCategory';
+import { CreateCategoryController }  from '../modules/car/UseCases/createCategory/CreateCategoryController';
 import { listCategoriesController } from '../modules/car/UseCases/listCategories';
-
-import multer from 'multer';
 import { importCategoryController } from '../modules/car/UseCases/importCategories';
+import multer from 'multer';
 // importando car de rotas;
 const categoriesRoutes = Router();
 
@@ -12,8 +11,9 @@ const upload = multer({
     dest:"./tmp", // dir do arquivo 
 });
 
+const createCategoryController = new CreateCategoryController();
 categoriesRoutes.post("/", (request, response) => {
-    return createCategorycontroller().handle(request,response);
+    return createCategoryController.handle(request,response);
 });
 
 categoriesRoutes.get('/', (request,response) =>{
