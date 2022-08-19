@@ -1,17 +1,20 @@
 import { CategoriesRepository } from "../../repositories/implementations/CategoriesRepository";
+import {inject, injectable} from "tsyringe"
 
 interface IRequest {
     name: string;
     description: string;
 };
-
 /**
- * precisamos definir como fucionara a pratica DIP(dependency inverson principle)
- * vamos inverver os papeis, iremos chamar dentro da classe abaixo a classe definida no nosso
- * arquivo de repositorio.
+o injectable faz uma verredura e associa a classe do createdCategory
+ele e responsavel por liberar a criacao das classes da nossa aplicacao 
+
  */
+@injectable() // 
 class CreateCategoryUseCase {
-    constructor(private categoriesRepository: CategoriesRepository) {}
+    constructor(
+        @inject("CategoriesRepository")
+        private categoriesRepository: CategoriesRepository) {}
 
     async execute({name, description}: IRequest): Promise <void> { // no momento nao iremos retornar nada 
         //findByName [e o nome da funcao, nao confunda como o metodo de find()
@@ -23,6 +26,5 @@ class CreateCategoryUseCase {
         this.categoriesRepository.create({name, description});
     }
 }
-
 
 export {CreateCategoryUseCase};
