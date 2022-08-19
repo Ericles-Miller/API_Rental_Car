@@ -1,9 +1,11 @@
 {
-    "type":"mssql",
+    "type":"postgres",
     "host": "localhost",
-    "username":"sa",
+    "username":"postgres",
     "password":"@18er0821",
+    "port":5433,
     "database": "rentex",
+    "entities": ["./src/modules/**/entities/*.ts"],
     "migrations":["./src/database/migrations/*.ts"],
     "extra":{
         "trustServerCertificate": true

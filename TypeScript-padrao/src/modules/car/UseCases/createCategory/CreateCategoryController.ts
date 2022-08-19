@@ -8,14 +8,14 @@ class CreateCategoryController {
     
     }
 
-    handle(request:Request,response:Response){
+    async handle(request:Request,response:Response): Promise<Response> {
         const { name, description } = request.body;
         /**
         * essa definicao abaixo foi feita por causa do constructor 
         * nela passamos como parametro a class do repositorio como 
         * private. essa declaracao esta em CreateCategoryService.ts
         */
-        this.createdCategoryUseCase.execute({name,description}); // class do repositorio declarada acima 
+        await this.createdCategoryUseCase.execute({name,description}); // class do repositorio declarada acima 
         return response.status(201).send();
     }
 }

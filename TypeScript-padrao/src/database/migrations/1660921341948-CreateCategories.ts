@@ -23,6 +23,7 @@ export class CreateCategories1660682202109 implements MigrationInterface {
                 {
                     name: "created_at",
                     type:"timestamp",
+                    default: "now()"
                 }
                 ],
             })

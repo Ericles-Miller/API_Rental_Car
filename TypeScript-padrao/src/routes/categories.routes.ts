@@ -1,5 +1,5 @@
 import { Router } from 'express'; //importo da biblioteca express;
-import { createCategorycontroller } from '../modules/car/UseCases/createCategory';
+import  createCategorycontroller  from '../modules/car/UseCases/createCategory';
 import { listCategoriesController } from '../modules/car/UseCases/listCategories';
 
 import multer from 'multer';
@@ -13,7 +13,7 @@ const upload = multer({
 });
 
 categoriesRoutes.post("/", (request, response) => {
-    return createCategorycontroller.handle(request,response);
+    return createCategorycontroller().handle(request,response);
 });
 
 categoriesRoutes.get('/', (request,response) =>{
