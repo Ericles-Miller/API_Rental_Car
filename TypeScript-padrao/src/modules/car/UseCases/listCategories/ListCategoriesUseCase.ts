@@ -1,4 +1,4 @@
-import { Category } from "../../entitis/category";
+import { Category } from "../../entities/category";
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
 
 

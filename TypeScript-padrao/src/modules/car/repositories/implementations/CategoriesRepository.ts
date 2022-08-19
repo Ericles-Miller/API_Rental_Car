@@ -1,17 +1,15 @@
 import { getRepository, Repository } from "typeorm";
-import { Category } from "../../entitis/category";
+import { Category } from "../../entities/category";
 import { ICategoriesRepository,ICreatedCategoryDTO } from "../ICategoriesRepository";
 
 
 class CategoriesRepository implements ICategoriesRepository{
     private repository: Repository<Category>; // relaciono a classe category 
 
-    // a partir de agora nosso constructor ele sera privado 
-     constructor() {
+    constructor() {
         //metodo this serve para acessar metodos do construct 
         this.repository = getRepository(Category); // inicialmente crio um array vazio
     }
-
 
     async create({description, name} : ICreatedCategoryDTO): Promise<void> {
         const category = this.repository.create({
@@ -28,9 +26,9 @@ class CategoriesRepository implements ICategoriesRepository{
     }
 
     async findByName(name:string): Promise<Category> {
-        
         // func abaixo faz o mesmo processo que o find()
         const category = await this.repository.findOne({name});// check if exists 
+        console.log(category);
         return category;
     }
 }
