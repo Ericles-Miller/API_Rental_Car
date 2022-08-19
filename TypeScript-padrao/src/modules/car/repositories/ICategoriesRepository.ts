@@ -1,4 +1,4 @@
-import { Category } from "../entitis/category";
+import { Category } from "../entities/category";
 
 
 //DTO => data transfer object

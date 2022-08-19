@@ -1,4 +1,4 @@
-import { Category } from "../entitis/category";
+import { Category } from "../entities/category";
 import { ICategoriesRepository,ICreatedCategoryDTO } from "./ICategoriesRepository";
 
 // clique ctrl + . para importar os metodos relacionados a interface de forma automatica 
