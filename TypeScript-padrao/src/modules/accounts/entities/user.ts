@@ -16,9 +16,9 @@ class User{
     @CreateDateColumn()
     created_at:Date;
     @Column()
-    drivers_license: string;
+    driver_license: string;
     @Column()
-    isAdimin: boolean
+    isAdmin: boolean
 
     constructor() {
         if(!this.id){
