@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
-import { ICreateUserDTO } from "../dtos/ICreateUserdto";
-import { UsersRepository } from "../repositories/implementations/UserRepository";
-import { IUsersRepository } from "../repositories/IUsersRepository";
+import { ICreateUserDTO } from "../../dtos/ICreateUserdto";
+import { UsersRepository } from "../../repositories/implementations/UserRepository";
+import { IUsersRepository } from "../../repositories/IUsersRepository";
 import { hash } from "bcryptjs";
 
 @injectable()
@@ -12,7 +12,7 @@ class CreateUserUseCase {
 
     async execute({name,email,password,driver_license}:ICreateUserDTO):Promise<void>{
         
-        const userAlreadyExists = await this.userRepository.findByName(email)
+        const userAlreadyExists = await this.userRepository.findByEmail(email)
 
         //criptografia senhas 
         const passwordHash = await hash(password,8);
