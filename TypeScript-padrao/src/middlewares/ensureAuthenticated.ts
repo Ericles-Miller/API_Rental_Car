@@ -1,5 +1,6 @@
 import { NextFunction,Request,Response } from "express";
 import { verify } from "jsonwebtoken"
+import { AppError } from "../error/AppError";
 import { UsersRepository } from "../modules/accounts/repositories/implementations/UserRepository";
 
 interface Ipayload {
@@ -13,7 +14,7 @@ export async function ensureAuthenticated(request:Request, response:Response, ne
     // bearer fsdjljtwre5435nlk23sfsd 
     const authHeader = request.headers.authorization;
     if(!authHeader) {
-        throw new Error("Token missing!");
+        throw new AppError("Token missing!",401);
     }
      // a virgula ignora 
     const [,token] = authHeader.split(" "); // divide a string pelo space 
@@ -26,11 +27,11 @@ export async function ensureAuthenticated(request:Request, response:Response, ne
         const user = await usersRepository.findById(user_id);
 
         if(!user) {
-            throw new Error("User don't exists!");
+            throw new AppError("User don't exists!",401);
         }
         next();
         
     }catch{
-        throw new Error("Invlid token!");
+        throw new AppError("Invlid token!",401);
     }
 }
