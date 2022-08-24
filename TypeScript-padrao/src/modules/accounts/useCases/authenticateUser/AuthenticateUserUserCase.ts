@@ -44,9 +44,16 @@ class AuthenticateUserUseCase {
             subject: user.id, // relaciona ao id
             expiresIn:"1d", // tempo para expirar 
         });
-
-        // esse return esta retornando IResponse -- tome cuidado
-        return { user,token } // retorno o user e token 
+        
+        const tokenReturn: IResponse = {
+            token, 
+            user:{
+                name:email,
+                email:user.email
+            }
+        };
+        
+        return tokenReturn
 
     }
 }

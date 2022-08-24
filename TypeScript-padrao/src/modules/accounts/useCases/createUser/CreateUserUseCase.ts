@@ -14,13 +14,12 @@ class CreateUserUseCase {
         
         const userAlreadyExists = await this.userRepository.findByEmail(email)
 
+        if(userAlreadyExists){
+            throw new Error("User already Exists");  
+         }
+
         //criptografia senhas 
         const passwordHash = await hash(password,8);
-
-        if(userAlreadyExists){
-           throw new Error("User already Exists");
-            
-        }
 
         await this.userRepository.create({
             name,
