@@ -28,9 +28,14 @@ export async function ensureAuthenticated(request:Request, response:Response, ne
         if(!user) {
             throw new AppError("User don't exists!",401);
         }
+        request.user = {
+            id: user_id
+        };
+
         next();
         
-    }catch{
+    }catch(err){
+        console.log(err);
         throw new AppError("Invlid token!",401);
     }
 }
