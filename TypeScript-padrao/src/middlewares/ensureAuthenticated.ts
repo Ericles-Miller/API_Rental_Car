@@ -7,7 +7,6 @@ interface Ipayload {
     sub:string;
 }
 
-
 /* a funcao nextFunction aceita a proxima rota que recebera a rota */
 export async function ensureAuthenticated(request:Request, response:Response, next:NextFunction) {
     

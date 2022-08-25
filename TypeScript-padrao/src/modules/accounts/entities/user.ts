@@ -17,6 +17,9 @@ class User{
     driver_license: string;
     @Column()
     isAdmin: boolean
+    @Column()
+    avatar: string;
+
 
     constructor() {
         if(!this.id){
