@@ -1,4 +1,4 @@
-import { inject } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 interface IRequest {
@@ -6,12 +6,7 @@ interface IRequest {
     avatar_file:string;
 }
 
-// adicionar columns in table user
-        // refatorar usuario com coluna com o avatar 
-        // configurar upload nulter 
-        // criar regra de negocio 
-        // cirar o controller
-
+@injectable()
 class UpdateUserAvatarUseCase {
 
     constructor (
@@ -20,11 +15,8 @@ class UpdateUserAvatarUseCase {
 
     async execute({ user_id, avatar_file }:IRequest): Promise<void> {
         const user = await this.usersRepository.findById(user_id);
-        console.log(user);
         user.avatar = avatar_file;
         await this.usersRepository.create(user);
-
-
     }
 }
 export {UpdateUserAvatarUseCase};
