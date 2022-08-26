@@ -6,8 +6,6 @@ import { CategoriesRepository } from '../../modules/car/repositories/implementat
 import { SpecificationsRepository } from '../../modules/car/repositories/implementations/SpecificationRespository';
 import { ISpecificationRepository } from '../../modules/car/repositories/ISpecificationRepository';
 
-
-
 /**
  * vamos passar a interface Icategoryrepository
  * criando registro de singleton 

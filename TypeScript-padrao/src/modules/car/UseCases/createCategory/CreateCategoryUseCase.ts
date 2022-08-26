@@ -9,17 +9,15 @@ interface IRequest {
 /**
 o injectable faz uma verredura e associa a classe do createdCategory
 ele e responsavel por liberar a criacao das classes da nossa aplicacao 
-
  */
-@injectable() // 
+@injectable() 
 class CreateCategoryUseCase {
     constructor(
         @inject("CategoriesRepository")
         private categoriesRepository: CategoriesRepository) {}
 
-    async execute({name, description}: IRequest): Promise <void> { // no momento nao iremos retornar nada 
-        //findByName [e o nome da funcao, nao confunda como o metodo de find()
-        console.log(this.categoriesRepository);
+    async execute({name, description}: IRequest): Promise <void> { 
+
         const categoryAlreadyExists = await this.categoriesRepository.findByName(name);
         if(categoryAlreadyExists) {
             throw new AppError("Category already exists!",401);

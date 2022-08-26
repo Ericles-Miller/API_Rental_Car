@@ -4,11 +4,10 @@ import { ICategoriesRepository,ICreatedCategoryDTO } from "../ICategoriesReposit
 
 
 class CategoriesRepository implements ICategoriesRepository{
-    private repository: Repository<Category>; // relaciono a classe category 
+    private repository: Repository<Category>; //repository -- pertence a biblioteca typeorm
 
     constructor() {
-        //metodo this serve para acessar metodos do construct 
-        this.repository = getRepository(Category); // inicialmente crio um array vazio
+        this.repository = getRepository(Category); // getRepository pertence ao typeorm --inicialmente crio um array vazio
     }
 
     async create({description, name} : ICreatedCategoryDTO): Promise<void> {
@@ -28,7 +27,6 @@ class CategoriesRepository implements ICategoriesRepository{
     async findByName(name:string): Promise<Category> {
         // func abaixo faz o mesmo processo que o find()
         const category = await this.repository.findOne({name});// check if exists 
-        console.log(category);
         return category;
     }
 }
