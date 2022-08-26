@@ -34,8 +34,7 @@ export async function ensureAuthenticated(request:Request, response:Response, ne
 
         next();
         
-    }catch(err){
-        console.log(err);
+    }catch{
         throw new AppError("Invlid token!",401);
     }
 }
