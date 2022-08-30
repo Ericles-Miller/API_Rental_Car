@@ -1,6 +1,6 @@
-import { CategoriesRepository } from "../../repositories/implementations/CategoriesRepository";
 import {inject, injectable} from "tsyringe"
-import { AppError } from "../../../../error/AppError";
+import { AppError } from "../../../../errors/AppError";
+import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
 
 interface IRequest {
     name: string;
@@ -14,7 +14,7 @@ ele e responsavel por liberar a criacao das classes da nossa aplicacao
 class CreateCategoryUseCase {
     constructor(
         @inject("CategoriesRepository")
-        private categoriesRepository: CategoriesRepository) {}
+        private categoriesRepository: ICategoriesRepository) {}
 
     async execute({name, description}: IRequest): Promise <void> { 
 

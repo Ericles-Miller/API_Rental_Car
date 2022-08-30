@@ -21,8 +21,6 @@ class UpdateUserAvatarUseCase {
             await deleteFile(`./tmp/avatar/${user.avatar}`); // entra na pasta e remove o arquivo
         }
         user.avatar = avatar_file;
-
-        user.avatar = avatar_file;
         await this.usersRepository.create(user);
     }
 }
