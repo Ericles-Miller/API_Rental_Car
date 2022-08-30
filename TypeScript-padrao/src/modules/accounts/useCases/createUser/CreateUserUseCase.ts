@@ -3,7 +3,7 @@ import { ICreateUserDTO } from "../../dtos/ICreateUserdto";
 import { UsersRepository } from "../../repositories/implementations/UserRepository";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 import { hash } from "bcryptjs";
-import { AppError } from "../../../../error/AppError";
+import { AppError } from "../../../../errors/AppError";
 
 @injectable()
 class CreateUserUseCase {
