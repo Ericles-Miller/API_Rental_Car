@@ -3,7 +3,7 @@ import { ICategoriesRepository, ICreatedCategoryDTO } from "../ICategoriesReposi
 
 
 class CategoriesRepositoryInMemory implements ICategoriesRepository{
-    categories:Category[] = [];
+    public categories:Category[] = [];
 
     async findByName(name: string): Promise<Category> {
         const category = this.categories.find((category) => category.name === name);
@@ -15,10 +15,7 @@ class CategoriesRepositoryInMemory implements ICategoriesRepository{
     }
     async create({ name, description }: ICreatedCategoryDTO): Promise<void> {
         const category = new Category();
-
-        Object.assign(category, {
-            name,description
-        });
+        Object.assign(category, { name, description });
         this.categories.push(category);
     }
     
