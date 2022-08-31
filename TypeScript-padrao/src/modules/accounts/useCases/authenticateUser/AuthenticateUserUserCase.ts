@@ -53,9 +53,7 @@ class AuthenticateUserUseCase {
                 email:user.email
             }
         };
-        
         return tokenReturn
-
     }
 }
 
