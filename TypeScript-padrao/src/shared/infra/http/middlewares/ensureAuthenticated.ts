@@ -1,11 +1,12 @@
 import { NextFunction,Request,Response } from "express";
 import { verify } from "jsonwebtoken"
-import { AppError } from "../errors/AppError";
-import { UsersRepository } from "../modules/accounts/repositories/implementations/UserRepository";
+import { AppError } from "@shared/errors/AppError";
+import { UsersRepository } from "@modules/accounts/infra/typeorm/repositories/UserRepository";
 
 interface Ipayload {
     sub:string;
 }
+
 
 /* a funcao nextFunction aceita a proxima rota que recebera a rota */
 export async function ensureAuthenticated(request:Request, response:Response, next:NextFunction) {

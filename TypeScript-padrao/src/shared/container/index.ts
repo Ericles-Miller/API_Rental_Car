@@ -1,9 +1,9 @@
 import {container} from 'tsyringe';
-import { UsersRepository } from '@modules/accounts/repositories/implementations/UserRepository';
+import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
 import { ICategoriesRepository } from '@modules/car/repositories/ICategoriesRepository';
-import { CategoriesRepository } from '@modules/car/repositories/implementations/CategoriesRepository';
-import { SpecificationsRepository } from '@modules/car/repositories/implementations/SpecificationRespository';
+import { CategoriesRepository } from '@modules/car/infra/typeorm/repositories/CategoriesRepository';
+import { SpecificationsRepository } from '@modules/car/infra/typeorm/repositories/SpecificationRespository';
 import { ISpecificationRepository } from '@modules/car/repositories/ISpecificationRepository';
 
 /**
