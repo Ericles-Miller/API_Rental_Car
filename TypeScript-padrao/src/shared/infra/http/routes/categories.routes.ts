@@ -1,7 +1,7 @@
 import { Router } from 'express'; //importo da biblioteca express;
-import { CreateCategoryController }  from '../modules/car/UseCases/createCategory/CreateCategoryController';
-import { ListCategoriesController } from '../modules/car/UseCases/listCategories/ListCategoriesController';
-import { ImportCategoryController } from '../modules/car/UseCases/importCategories/importCategoryController';
+import { CreateCategoryController }  from'@modules/car/UseCases/createCategory/CreateCategoryController';
+import { ListCategoriesController } from '@modules/car/UseCases/listCategories/ListCategoriesController';
+import { ImportCategoryController } from '@modules/car/UseCases/importCategories/importCategoryController';
 
 
 import multer from 'multer';
