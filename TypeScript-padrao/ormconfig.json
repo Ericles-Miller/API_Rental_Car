@@ -6,12 +6,12 @@
     "port":5433,
     "database": "rentex",
     "entities": ["./src/modules/**/entities/*.ts"],
-    "migrations":["./src/database/migrations/*.ts"],
+    "migrations":["./src/shared/infra/typeorm/migrations/*.ts"],
     "extra":{
         "trustServerCertificate": true
     },
     "cli":{
-        "migrationsDir":"./src/database/migrations"
+        "migrationsDir":"./src/shared/infra/typeorm/migrations"
     }
 }
 
