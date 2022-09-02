@@ -1,6 +1,6 @@
-import { AppError } from "../../../../shared/errors/AppError";
-import { ICreateUserDTO } from "../../dtos/ICreateUserdto";
-import { UsersRepositoryInMemory } from "../../repositories/in-memory/UsersRepositoryinMemory";
+import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserdto";
+import { UsersRepositoryInMemory } from "@modules/accounts/repositories/in-memory/UsersRepositoryinMemory";
+import { AppError } from "@shared/errors/AppError";
 import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUserCase"
 
@@ -28,7 +28,6 @@ describe("Authenticate User", () => {
             email: user.email,
             password: user.password
         });
-        console.log(result);
     });
 
     it("should not be able to authenticate with incorrect password", () =>{
