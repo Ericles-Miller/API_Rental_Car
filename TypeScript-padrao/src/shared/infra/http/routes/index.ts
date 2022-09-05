@@ -5,6 +5,7 @@ import { categoriesRoutes } from "./categories.routes";
 import { specificationsRoutes } from "./specification.routes";
 import { usersRoutes } from "./User.routes";
 
+
 const router = Router();
 
 router.use("/categories", categoriesRoutes);
@@ -15,3 +16,4 @@ router.use("/cars",CarsRoutes);
 router.use(authenticateRoutes) // faca isso passando direto o authenticate 
 
 export { router };   
+
