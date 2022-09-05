@@ -1,19 +1,10 @@
-// import {DataSource} from "typeorm";
-// 
-// export const dataSource = new DataSource({
-//     type: "mssql",
-//     host: "localhost",
-//     username:"sa",
-//     password:"@18er0821",
-//     database:"rentex",
-//     migrations:["./src/database/migrations/*.ts"],
-//     extra:{
-//         trustServerCertificate: true,
-//     }
-// });
-// 
-// dataSource.initialize();
+import { createConnection, Connection, getConnectionOptions } from 'typeorm';
 
-import { createConnection } from "typeorm";
-
-createConnection();
+export default async (host = 'database'): Promise<Connection> => {
+  const defaultOptions = await getConnectionOptions();
+  return createConnection(
+    Object.assign(defaultOptions, {
+      host,
+    }),
+  );
+};
