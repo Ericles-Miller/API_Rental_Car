@@ -31,8 +31,23 @@ class CarsRepository implements ICarsRepository {
     return car;
   }
 
-  findAvailable(): Promise<Car[]> {
-    throw new Error('Method not implemented.');
+  async findAvailable(brand?: string, category_id?: string, name?: string): Promise<Car[]> {
+    const carsQuery = await this.repository.createQueryBuilder('c').where('available = :available', { available: true });
+
+    if (brand) {
+      carsQuery.andWhere('c.brand = :brand', { brand }); // query que busca valor pela placa
+    }
+
+    if (name) {
+      carsQuery.andWhere('c.name = :name', { name }); // query que busca valor pelo nome
+    }
+
+    if (category_id) {
+      carsQuery.andWhere('c.category_id = :category_id', { category_id }); // query para buscar o veiculo a partir do campo category_id
+    }
+
+    const cars = await carsQuery.getMany(); // funcao que rodara o comando do banco de dados
+    return cars;
   }
 }
 
