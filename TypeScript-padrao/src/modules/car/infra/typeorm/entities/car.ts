@@ -1,9 +1,13 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, PrimaryColumn, Timestamp } from 'typeorm';
-import {v4 as uuidV4} from 'uuid'
-import { Category } from './category';
+import {
+  Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, PrimaryColumn,
+} from 'typeorm';
+import { v4 as uuidV4 } from 'uuid';
 
-@Entity("cars")
-class Car{
+import { Category } from './category';
+import { Specification } from './specifications';
+
+@Entity('cars')
+class Car {
     @PrimaryColumn()
     id:string;
     @Column()
@@ -21,22 +25,31 @@ class Car{
     @Column()
     brand: string;
 
-    // cardinalidade n pra n 
-    @ManyToMany(() =>Category)
-    @JoinColumn({name: "category_id"}) // referencia ao fk 
+    // cardinalidade n pra n
+    @ManyToMany(() => Category)
+    @JoinColumn({ name: 'category_id' }) // referencia ao fk
     category: Category;
 
     @Column()
     category_id: string;
+
+    @ManyToMany(() => Specification)
+    @JoinTable({
+      name: 'specifications_cars',
+      joinColumns: [{ name: 'car_id' }],
+      inverseJoinColumns: [{ name: 'specification_id' }],
+    })
+    specifications: Specification[]; // array de specification
+
     @CreateDateColumn()
     created_at: Date;
 
     constructor() {
-        if(!this.id){
-            this.id = uuidV4();
-            this.available = true;
-        }
+      if (!this.id) {
+        this.id = uuidV4();
+        this.available = true;
+      }
     }
 }
 
-export {Car};
+export { Car };
