@@ -4,7 +4,7 @@ import { ICreatedSpecificationDTO, ISpecificationRepository } from '../ISpecific
 
 class SpecificationRepositoryInMemory implements ISpecificationRepository {
   specifications: Specification[] = [];
-  async create({ name, description }: ICreatedSpecificationDTO): Promise<void> {
+  async create({ name, description }: ICreatedSpecificationDTO): Promise<Specification> {
     const specification = new Specification();
 
     Object.assign(specification, {
@@ -13,6 +13,7 @@ class SpecificationRepositoryInMemory implements ISpecificationRepository {
     });
 
     this.specifications.push(specification);
+    return specification;
   }
   async findByName(name: string): Promise<Specification> {
     return this.specifications.find((specification) => specification.name === name);
