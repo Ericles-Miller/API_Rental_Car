@@ -1,4 +1,4 @@
-
+import { Specification } from '../infra/typeorm/entities/specifications';
 
 interface ICreatetCarDTO{
     name:string;
@@ -8,6 +8,7 @@ interface ICreatetCarDTO{
     fine_amount: number;
     brand: string;
     category_id:string;
+    specifications?: Specification[];
 }
 
-export {ICreatetCarDTO};
+export { ICreatetCarDTO };
