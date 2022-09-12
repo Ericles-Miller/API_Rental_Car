@@ -1,5 +1,7 @@
 import { RentalsRepositoryInMemory } from '@modules/rentals/Repositories/in-memory/RentalsRepositoryInMemory';
 
+import { AppError } from '@shared/errors/AppError';
+
 import { CreateRentalUseCase } from './CreateRentalUseCase';
 
 let createRentalUseCase : CreateRentalUseCase;
@@ -11,10 +13,45 @@ describe('Create Rental', () => {
   });
 
   it('should be able to create a new rental', async () => {
-    await createRentalUseCase.execute({
+    const rental = await createRentalUseCase.execute({
       user_id: '12345',
       car_id: '54321',
       expect_return_date: new Date(),
     });
+    console.log(rental);
+    expect(rental).toHaveProperty('id');
+    expect(rental).toHaveProperty('start_date');
+  });
+
+  it('should not be able to create a new rentali if there is another ot the same user', async () => {
+    expect(async () => {
+      await createRentalUseCase.execute({
+        user_id: '12345',
+        car_id: '54321',
+        expect_return_date: new Date(),
+      });
+
+      const rental = await createRentalUseCase.execute({
+        user_id: '12345',
+        car_id: '54321',
+        expect_return_date: new Date(),
+      });
+    }).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to create a new rentali if there is another ot the same car', async () => {
+    expect(async () => {
+      await createRentalUseCase.execute({
+        user_id: '123',
+        car_id: 'test',
+        expect_return_date: new Date(),
+      });
+
+      const rental = await createRentalUseCase.execute({
+        user_id: '321',
+        car_id: 'test',
+        expect_return_date: new Date(),
+      });
+    }).rejects.toBeInstanceOf(AppError);
   });
 });
