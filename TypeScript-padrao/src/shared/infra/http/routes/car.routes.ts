@@ -1,6 +1,6 @@
 import uploadConfig from '@config/upload';
 import { CreateCarController } from '@modules/car/UseCases/createcar/CreateCarController';
-import { CreateCarSpecificationController } from '@modules/car/UseCases/CreateCarSpecificationUseCase/CreateCarSpecificationController';
+import { CreateCarSpecificationController } from '@modules/car/UseCases/CreateCarSpecification/CreateCarSpecificationController';
 import { ListAvailableCarsController } from '@modules/car/UseCases/listAvailableCars/listAvailableCarsController';
 import { UploadCarImageController } from '@modules/car/UseCases/uploadCarImage/uploadCarImageController';
 import { Router } from 'express';
