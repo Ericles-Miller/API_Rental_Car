@@ -1,4 +1,4 @@
-import { CarsRepository } from '@modules/car/infra/typeorm/repositories/CarsRepository';
+import { ICarsRepository } from '@modules/car/repositories/ICarsRepository';
 import { Rental } from '@modules/rentals/infra/typeorm/entities/Rental';
 import { IRentalsRepository } from '@modules/rentals/Repositories/IRentalsRepository';
 import dayjs from 'dayjs';
@@ -24,7 +24,7 @@ class CreateRentalUseCase {
     @inject('DayjsDateProvider')
     private dateProvider: IDateProvider,
     @inject('CarsRepository')
-    private carRepository: CarsRepository,
+    private carRepository: ICarsRepository,
   ) {}
 
   async execute({ user_id, car_id, expected_return_date }: IRequest): Promise<Rental> {

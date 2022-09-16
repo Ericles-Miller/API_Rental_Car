@@ -1,6 +1,6 @@
 import { ICarsRepository } from '@modules/car/repositories/ICarsRepository';
 import { IRentalsRepository } from '@modules/rentals/Repositories/IRentalsRepository';
-import { inject } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
 import { AppError } from '@shared/errors/AppError';
@@ -9,7 +9,7 @@ interface IRequest {
   id:string,
   user_id: string,
 }
-
+@injectable()
 class DevolutionRentalUseCase {
   constructor(
     @inject('RentalsRepository')

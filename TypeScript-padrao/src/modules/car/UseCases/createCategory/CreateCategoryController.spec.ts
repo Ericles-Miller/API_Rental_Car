@@ -10,8 +10,9 @@ let connection : Connection;
 
 describe('Create Category Controller', () => {
   beforeAll(async () => {
-    connection = await createConnection();
+    connection = await createConnection(); // localhost
     await connection.runMigrations();
+
     const id = uuid();
     const password = await hash('admin', 8);
 
@@ -54,7 +55,7 @@ describe('Create Category Controller', () => {
     });
 
     console.log(responseToken.body);
-    // o metodo request tem acesso a todas as requests pertecentes a app
+    // o metodo request tem acesso   a todas as requests pertecentes a app
     // o metodo get acessa a rota desejada do tipo get
     // o expect ele espera a response do tipo 200
 
