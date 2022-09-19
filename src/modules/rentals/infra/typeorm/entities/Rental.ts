@@ -1,5 +1,6 @@
+import { Car } from '@modules/car/infra/typeorm/entities/car';
 import {
-  Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn,
+  Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
@@ -8,9 +9,14 @@ class Rental {
   @PrimaryColumn()
   id:string;
   @Column()
-  user_id: string;
+  user_id: string; // fk
+
+  @ManyToOne(() => Car)
+  @JoinColumn({ name: 'car_id' })
+  car:Car;
+
   @Column()
-  car_id: string;
+  car_id: string; // fk
   @Column()
   start_date: Date;
   @Column()
