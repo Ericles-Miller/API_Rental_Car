@@ -28,27 +28,28 @@ class DevolutionRentalUseCase {
     const minimum_daily = 1;
 
     if (!rental) {
-      throw new AppError('Rental does not exists!');
+      throw new AppError('Rental does not exists!'); // verifica se existe o aluguel do car
     }
 
     // verify time of rental
     const dateNow = this.dateProvider.dateNow();
 
-    let daily = this.dateProvider.compareInDays(
+    let daily = this.dateProvider.compareInDays( // chamo a funcao para retornar o numero de dias
       rental.start_date,
       this.dateProvider.dateNow(),
     );
 
-    if (daily <= 0) {
+    if (daily <= 0) { // verifica se a devolucao do carro foi feita antes ou dentro do prazo
       daily = minimum_daily;
     }
+    // chamo a funcao para retornar o numero de horas
     const delay = this.dateProvider.compareInHours(
       dateNow,
       rental.expected_return_date,
     );
 
     let total = 0;
-    if (delay > 0) {
+    if (delay > 0) { // calc da multa
       const calculate_fine = delay * car.fine_amount;
       total = calculate_fine;
     }

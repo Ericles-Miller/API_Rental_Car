@@ -28,8 +28,10 @@ class CreateRentalUseCase {
   ) {}
 
   async execute({ user_id, car_id, expected_return_date }: IRequest): Promise<Rental> {
-    const minimumHour = 24;
+    const minimumHour = 24; // var resp por ter o minimo de diaria
+    // verifico se o car esta indisponivel
     const carUnavailable = await this.rentalsRepository.findByCar(car_id);
+    // verifico se o user esta disponivel
     const rentalOpenToUser = await this.rentalsRepository.findOpenRentalByUser(user_id);
 
     if (carUnavailable) {
@@ -39,7 +41,7 @@ class CreateRentalUseCase {
       throw new AppError('there is a rental in progress for user!');
     }
     // validacao aluguel duracao 24 horas
-    const dateNow = this.dateProvider.dateNow();
+    const dateNow = this.dateProvider.dateNow(); // crio uma data feita nesse momento
     const compare = this.dateProvider.compareInHours(dateNow, expected_return_date);
 
     if (compare < minimumHour) {
