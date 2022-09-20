@@ -1,5 +1,5 @@
 import { AppError } from '../../../../shared/errors/AppError';
-import { CategoriesRepositoryInMemory } from '../../repositories/inmemory/CategoriesRepositoyInMemory';
+import { CategoriesRepositoryInMemory } from '../../repositories/InMemory/CategoriesRepositoyInMemory';
 import { CreateCategoryUseCase } from './CreateCategoryUseCase';
 
 let createCategoryUseCase: CreateCategoryUseCase;
@@ -27,20 +27,18 @@ describe('Create Category', () => {
   });
 
   it('should not be able create a new Category with same name ', async () => {
-    expect(async () => {
-      const category = {
-        name: 'Category test',
-        description: 'Category description Test',
-      };
+    const category = {
+      name: 'Category test',
+      description: 'Category description Test',
+    };
 
-      await createCategoryUseCase.execute({
-        name: 'Category Test',
-        description: 'Category description Test',
-      });
-      await createCategoryUseCase.execute({
-        name: 'Category Test',
-        description: 'Category description Test',
-      });
-    }).rejects.toBeInstanceOf(AppError);
+    await createCategoryUseCase.execute({
+      name: 'Category Test',
+      description: 'Category description Test',
+    });
+    expect(createCategoryUseCase.execute({
+      name: 'Category Test',
+      description: 'Category description Test',
+    })).rejects.toEqual(new AppError('Category already exists!'));
   });
 });
