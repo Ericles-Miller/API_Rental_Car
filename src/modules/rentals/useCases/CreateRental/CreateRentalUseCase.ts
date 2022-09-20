@@ -29,14 +29,18 @@ class CreateRentalUseCase {
 
   async execute({ user_id, car_id, expected_return_date }: IRequest): Promise<Rental> {
     const minimumHour = 24; // var resp por ter o minimo de diaria
+    // const carExists = await this.carRepository.findById(car_id);
+    // if (!carExists) {
+    //   throw new AppError('car not exists!');
+    // }
     // verifico se o car esta indisponivel
     const carUnavailable = await this.rentalsRepository.findByCar(car_id);
-    // verifico se o user esta disponivel
-    const rentalOpenToUser = await this.rentalsRepository.findOpenRentalByUser(user_id);
-
     if (carUnavailable) {
       throw new AppError('Car is unavailable!');
     }
+
+    // verifico se o user esta disponivel
+    const rentalOpenToUser = await this.rentalsRepository.findOpenRentalByUser(user_id);
     if (rentalOpenToUser) {
       throw new AppError('there is a rental in progress for user!');
     }

@@ -1,4 +1,4 @@
-import { CarsRepositoryInMemory } from '@modules/car/repositories/inmemory/CarsRepositoryInMemory';
+import { CarsRepositoryInMemory } from '@modules/car/repositories/InMemory/CarsRepositoryInMemory';
 
 import { AppError } from '@shared/errors/AppError';
 

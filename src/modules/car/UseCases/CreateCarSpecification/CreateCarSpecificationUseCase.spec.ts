@@ -1,5 +1,5 @@
-import { CarsRepositoryInMemory } from '@modules/car/repositories/inmemory/CarsRepositoryInMemory';
-import { SpecificationRepositoryInMemory } from '@modules/car/repositories/inmemory/SpecificationReposioryInMemory';
+import { CarsRepositoryInMemory } from '@modules/car/repositories/InMemory/CarsRepositoryInMemory';
+import { SpecificationRepositoryInMemory } from '@modules/car/repositories/InMemory/SpecificationReposioryInMemory';
 
 import { AppError } from '@shared/errors/AppError';
 

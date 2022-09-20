@@ -31,14 +31,15 @@ class AuthenticateUserUseCase {
     * password is corrtect
     * generate token
     */
+    console.log(email);
     const user = await this.usersRepository.findByEmail(email);
     if (!user) {
-      throw new AppError('Email or password incorrect!', 401);
+      throw new AppError('Email or password incorrect!', 400);
     }
     // comparando senhas
     const passwordMatch = await compare(password, user.password);
     if (!passwordMatch) {
-      throw new AppError('Email or password incorrect!', 401);
+      throw new AppError('Email or password incorrect!', 400);
     }
     // generate token
     const token = sign({}, '8125b713a009a54b465f2f029ea632e2', {
