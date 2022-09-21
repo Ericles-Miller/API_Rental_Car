@@ -1,5 +1,5 @@
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
-import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
+import { IUsersRepository } from '@modules/accounts/Repositories/IUsersRepository';
 import { CarsImageRepository } from '@modules/car/infra/typeorm/repositories/CarsImageRepository';
 import { CarsRepository } from '@modules/car/infra/typeorm/repositories/CarsRepository';
 import { CategoriesRepository } from '@modules/car/infra/typeorm/repositories/CategoriesRepository';
