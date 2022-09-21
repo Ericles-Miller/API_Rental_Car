@@ -1,5 +1,5 @@
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
-import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
+import { IUsersRepository } from '@modules/accounts/Repositories/IUsersRepository';
 import { CarsImageRepository } from '@modules/car/infra/typeorm/repositories/CarsImageRepository';
 import { CarsRepository } from '@modules/car/infra/typeorm/repositories/CarsRepository';
 import { CategoriesRepository } from '@modules/car/infra/typeorm/repositories/CategoriesRepository';
@@ -12,6 +12,9 @@ import { RentalsRepository } from '@modules/rentals/infra/typeorm/repositories/R
 import { IRentalsRepository } from '@modules/rentals/Repositories/IRentalsRepository';
 import { container } from 'tsyringe';
 import '@shared/container/providers';
+// eslint-disable-next-line import-helpers/order-imports
+import { IUsersTokenRepository } from '@modules/accounts/Repositories/IUsersTokenRepositories';
+import { UsersTokensRepository } from '@modules/accounts/infra/typeorm/repositories/UserTokensRepository';
 
 /**
  * vamos passar a interface Icategoryrepository
@@ -45,4 +48,9 @@ container.registerSingleton<ICarsImageRepository>(
 container.registerSingleton<IRentalsRepository>(
   'RentalsRepository',
   RentalsRepository,
+);
+
+container.registerSingleton<IUsersTokenRepository>(
+  'UsersTokensRepository',
+  UsersTokensRepository,
 );
