@@ -19,7 +19,7 @@ class UserTokens {
   created_at: Date;
 
   @ManyToOne(() => User)
-  @JoinColumn({ name: 'user_id ' })
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   constructor() {

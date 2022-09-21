@@ -1,21 +1,25 @@
+import auth from '@config/auth';
 import { IUsersRepository } from '@modules/accounts/Repositories/IUsersRepository';
+import { IUsersTokenRepository } from '@modules/accounts/Repositories/IUsersTokenRepositories';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
+import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
 import { AppError } from '@shared/errors/AppError';
 
-interface IRequest{
-    email:string;
-    password:string;
+interface IRequest {
+  email: string;
+  password: string;
 }
 
-interface IResponse{
-    user:{
-        name:string;
-        email: string;
-    },
-    token: string;
+interface IResponse {
+  user: {
+    name: string;
+    email: string;
+  },
+  token: string;
+  refresh_token: string;
 }
 
 @injectable()
@@ -23,16 +27,23 @@ class AuthenticateUserUseCase {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
-  ) {}
+    @inject('UsersTokensRepository')
+    private usersTokensRepository: IUsersTokenRepository,
+    @inject('DayjsDateProvider')
+    private dayjsDateProvider: IDateProvider,
+  ) { }
 
   async execute({ email, password }: IRequest): Promise<IResponse> {
-    /** verificacoes
-     * if user exists
-    * password is corrtect
-    * generate token
-    */
     console.log(email);
     const user = await this.usersRepository.findByEmail(email);
+    const {
+      expires_in_token,
+      secret_refresh_token,
+      secret_token,
+      expires_in_refresh_token,
+      expires_refresh_token_days,
+    } = auth;
+
     if (!user) {
       throw new AppError('Email or password incorrect!', 400);
     }
@@ -42,16 +53,31 @@ class AuthenticateUserUseCase {
       throw new AppError('Email or password incorrect!', 400);
     }
     // generate token
-    const token = sign({}, '8125b713a009a54b465f2f029ea632e2', {
+    const token = sign({}, secret_token, {
       subject: user.id, // relaciona ao id
-      expiresIn: '1d', // tempo para expirar
+      expiresIn: expires_in_token, // tempo para expirar relacionado ao export auth
     });
+
+    const refresh_token = sign({ email }, secret_refresh_token, {
+      subject: user.id,
+      expiresIn: expires_in_refresh_token,
+    });
+
+    const refresh_token_expires_date = this.dayjsDateProvider.addDays(expires_refresh_token_days);
+
+    await this.usersTokensRepository.create({
+      user_id: user.id,
+      refresh_token,
+      expires_date: refresh_token_expires_date,
+    });
+
     const tokenReturn: IResponse = {
       token,
       user: {
         name: email,
         email: user.email,
       },
+      refresh_token,
     };
     return tokenReturn;
   }
