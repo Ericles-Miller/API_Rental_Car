@@ -14,7 +14,7 @@ import { container } from 'tsyringe';
 import '@shared/container/providers';
 // eslint-disable-next-line import-helpers/order-imports
 import { IUsersTokenRepository } from '@modules/accounts/Repositories/IUsersTokenRepositories';
-import { UsersTokensRepository } from '@modules/accounts/infra/typeorm/repositories/UserTokensRepository';
+import { UsersTokensRepository } from '@modules/accounts/infra/typeorm/repositories/UsersTokensRepository';
 
 /**
  * vamos passar a interface Icategoryrepository
