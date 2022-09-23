@@ -24,7 +24,7 @@ export async function ensureAuthenticated(request:Request, response:Response, ne
   try {
     const { sub: user_id } = verify(
       token,
-      auth.secret_refresh_token
+      auth.secret_refresh_token,
     ) as IPayload; // retorna um Ipayload
 
     const usersRepository = new UsersRepository();
