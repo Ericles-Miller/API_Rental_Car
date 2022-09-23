@@ -1,4 +1,6 @@
+import auth from '@config/auth';
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
+import { UsersTokensRepository } from '@modules/accounts/infra/typeorm/repositories/UsersTokensRepository';
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 
@@ -10,6 +12,8 @@ interface IPayload {
 
 /* a funcao nextFunction aceita a proxima rota que recebera a rota */
 export async function ensureAuthenticated(request:Request, response:Response, next:NextFunction) {
+  const usersTokensRepository = new UsersTokensRepository();
+
   // bearer fsdjljtwre5435nlk23sfsd
   const authHeader = request.headers.authorization;
   if (!authHeader) {
@@ -18,10 +22,15 @@ export async function ensureAuthenticated(request:Request, response:Response, ne
   // a virgula ignora
   const [, token] = authHeader.split(' '); // divide a string pelo space -- nao retirar o space
   try {
-    console.log(token);
-    const { sub: user_id } = verify(token, '8125b713a009a54b465f2f029ea632e2') as IPayload; // retorna um Ipayload
+    const { sub: user_id } = verify(
+      token,
+      auth.secret_refresh_token,
+    ) as IPayload; // retorna um Ipayload
+
     const usersRepository = new UsersRepository();
-    const user = await usersRepository.findById(user_id);
+
+    const user = await usersTokensRepository.findByUserIdAndToken(user_id, token);
+
     if (!user) {
       throw new AppError('User does exists!', 401);
     }
