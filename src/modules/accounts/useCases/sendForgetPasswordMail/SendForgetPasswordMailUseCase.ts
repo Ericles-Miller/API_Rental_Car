@@ -23,7 +23,7 @@ class SendForgetPasswordMailUseCase {
 
   async execute(email:string): Promise<void> {
     const user = await this.usersRepository.findByEmail(email);
-    const templatePath = resolve(__dirname, '..', '..', 'views', 'forgotPassword.hbs');
+    const templatePath = resolve(__dirname, '..', '..', 'views', 'email', 'ForgotPassword.hbs');
 
     if (!user) {
       throw new AppError('User does not exists!');
@@ -40,7 +40,7 @@ class SendForgetPasswordMailUseCase {
 
     const variables = {
       name: user.name,
-      link: `${process.env.FORGOT_MAIL_URL$}{token}`,
+      link: `${process.env.FORGOT_MAIL_URL$}${token}`,
     };
 
     await this.mailProvider.sendEmail(
