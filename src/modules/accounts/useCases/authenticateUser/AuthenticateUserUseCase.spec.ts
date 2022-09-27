@@ -1,21 +1,30 @@
 import { ICreateUserDTO } from '@modules/accounts/dtos/ICreateUserdto';
 import { UsersRepositoryInMemory } from '@modules/accounts/Repositories/in-memory/UsersRepositoryinMemory';
+import { UsersTokensRepositoryInMemory } from '@modules/accounts/Repositories/in-memory/UsersTokensRepositoryInMemeory';
 
+import { DayjsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayJsDateProvider';
 import { AppError } from '@shared/errors/AppError';
 
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase';
-import { AuthenticateUserUseCase } from './AuthenticateUserUserCase';
+import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 
 let authenticateUserUseCase: AuthenticateUserUseCase;
 let usersRepositoryInMemory: UsersRepositoryInMemory;
 let createUserUseCase: CreateUserUseCase;
+let usersTokensRepositoryInMemory : UsersTokensRepositoryInMemory;
+let dayjsDateProvider: DayjsDateProvider;
 
 describe('Authenticate User', () => {
   beforeEach(() => {
     usersRepositoryInMemory = new UsersRepositoryInMemory();
-    authenticateUserUseCase = new AuthenticateUserUseCase(usersRepositoryInMemory);
+    usersTokensRepositoryInMemory = new UsersTokensRepositoryInMemory();
+    dayjsDateProvider = new DayjsDateProvider();
+
+    authenticateUserUseCase = new AuthenticateUserUseCase(usersRepositoryInMemory, usersTokensRepositoryInMemory, dayjsDateProvider);
+
     createUserUseCase = new CreateUserUseCase(usersRepositoryInMemory);
   });
+
   it('should be able to authenticate an user', async () => {
     const user: ICreateUserDTO = {
       driver_license: '000234',
@@ -23,11 +32,15 @@ describe('Authenticate User', () => {
       password: '1234',
       name: 'User Test',
     };
+    console.log(user);
     await createUserUseCase.execute(user);
+
     const result = await authenticateUserUseCase.execute({
       email: user.email,
       password: user.password,
     });
+
+    expect(result).toHaveProperty('token');
   });
 
   it('should not be able to authenticate an nonexistent user', async () => {
