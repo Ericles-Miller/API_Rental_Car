@@ -20,7 +20,8 @@ describe('Authenticate User', () => {
     usersTokensRepositoryInMemory = new UsersTokensRepositoryInMemory();
     dayjsDateProvider = new DayjsDateProvider();
 
-    authenticateUserUseCase = new AuthenticateUserUseCase(usersRepositoryInMemory, usersTokensRepositoryInMemory, dayjsDateProvider);
+    authenticateUserUseCase = new AuthenticateUserUseCase(
+      usersRepositoryInMemory, usersTokensRepositoryInMemory, dayjsDateProvider);
 
     createUserUseCase = new CreateUserUseCase(usersRepositoryInMemory);
   });

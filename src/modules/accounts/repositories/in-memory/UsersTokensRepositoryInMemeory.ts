@@ -5,7 +5,7 @@ import { Utils } from 'handlebars';
 import { IUsersTokenRepository } from '../IUsersTokenRepositories';
 
 class UsersTokensRepositoryInMemory implements IUsersTokenRepository {
-    usersTokens: UserTokens[];
+    usersTokens: UserTokens[] = [];
 
     async create(
       { user_id, refresh_token, expires_date }: ICreateUserTokenDTO,
