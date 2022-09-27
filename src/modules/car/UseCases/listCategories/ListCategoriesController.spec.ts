@@ -37,13 +37,13 @@ describe('Create Category Controller', () => {
     // o metodo get acessa a rota desejada do tipo get
     // o expect ele espera a response do tipo 200
 
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
 
     await request(app).post('/categories').send({
       name: 'Category Supertest',
       description: 'Category Supertest',
     }).set({
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${refresh_token}`,
     });
 
     const response = await request(app).get('/categories');
