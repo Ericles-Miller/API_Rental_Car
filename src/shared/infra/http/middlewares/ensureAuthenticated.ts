@@ -12,28 +12,21 @@ interface IPayload {
 
 /* a funcao nextFunction aceita a proxima rota que recebera a rota */
 export async function ensureAuthenticated(request:Request, response:Response, next:NextFunction) {
-  const usersTokensRepository = new UsersTokensRepository();
-
   // bearer fsdjljtwre5435nlk23sfsd
   const authHeader = request.headers.authorization;
+
   if (!authHeader) {
     throw new AppError('Token missing!', 401);
   }
   // a virgula ignora
   const [, token] = authHeader.split(' '); // divide a string pelo space -- nao retirar o space
+
   try {
     const { sub: user_id } = verify(
       token,
-      auth.secret_refresh_token,
+      auth.secret_token,
     ) as IPayload; // retorna um Ipayload
 
-    const usersRepository = new UsersRepository();
-
-    const user = await usersTokensRepository.findByUserIdAndToken(user_id, token);
-
-    if (!user) {
-      throw new AppError('User does exists!', 401);
-    }
     request.user = {
       id: user_id,
     };
