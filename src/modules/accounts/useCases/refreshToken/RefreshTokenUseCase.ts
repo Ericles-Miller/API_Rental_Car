@@ -11,6 +11,11 @@ interface IPayLoad {
   email: string;
 }
 
+interface ITokenResponse{
+    token: string;
+    refresh_token: string;
+}
+
 class RefreshTokenUseCase {
   constructor(
     @inject('UserTokensRepository')
@@ -19,7 +24,7 @@ class RefreshTokenUseCase {
     private datejsProvider: IDateProvider,
   ) { }
 
-  async execute(token: string) {
+  async execute(token: string): Promise<ITokenResponse> {
     const { email, sub } = verify(token, auth.secret_refresh_token) as IPayLoad;
     const user_id = sub;
 
@@ -40,7 +45,16 @@ class RefreshTokenUseCase {
 
     await this.usersTokensRepository.create({ expires_date, refresh_token, user_id });
 
-    return refresh_token;
+    // generate token
+    const newToken = sign({}, auth.secret_token, {
+      subject: user_id, // relaciona ao id
+      expiresIn: auth.expires_in_token, // tempo para expirar relacionado ao export auth
+    });
+
+    return {
+      refresh_token,
+      token: newToken,
+    };
   }
 }
 
