@@ -15,6 +15,7 @@
   "dependencies": {
     "-": "^0.0.1",
     "@types/nodemailer": "^6.4.6",
+    "aws-sdk": "^2.1226.0",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "csv": "^6.2.0",
