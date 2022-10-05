@@ -5,7 +5,7 @@ import { DevolutionRentalUseCase } from './DevolutionRentalUseCase';
 
 class DevolutionRentalController {
   async handle(request: Request, response: Response) : Promise<Response> {
-    const { id: user_id } = request.user; // ver q implementation e essa
+    const { id: user_id } = request.user;
     const { id } = request.params;
     const devolutionRentalUseCase = container.resolve(DevolutionRentalUseCase);
 
