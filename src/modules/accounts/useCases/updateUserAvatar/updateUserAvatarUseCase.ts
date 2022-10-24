@@ -4,8 +4,8 @@ import { inject, injectable } from 'tsyringe';
 import { IStorageProvider } from '@shared/container/providers/storegeProvider/IStorageProvider';
 
 interface IRequest {
-    user_id: string;
-    avatar_file:string;
+  user_id: string;
+  avatar_file: string;
 }
 
 @injectable()
@@ -17,7 +17,7 @@ class UpdateUserAvatarUseCase {
     private storageProvider: IStorageProvider,
   ) {}
 
-  async execute({ user_id, avatar_file }:IRequest): Promise<void> {
+  async execute({ user_id, avatar_file }: IRequest): Promise<void> {
     const user = await this.usersRepository.findById(user_id);
 
     if (user.avatar) {
@@ -26,7 +26,9 @@ class UpdateUserAvatarUseCase {
     await this.storageProvider.save(avatar_file, 'avatar');
 
     user.avatar = avatar_file;
+
     await this.usersRepository.create(user);
   }
 }
+
 export { UpdateUserAvatarUseCase };
