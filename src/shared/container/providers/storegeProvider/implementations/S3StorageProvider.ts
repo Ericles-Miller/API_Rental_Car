@@ -7,36 +7,44 @@ import { resolve } from 'path';
 import { IStorageProvider } from '../IStorageProvider';
 
 class S3StorageProvider implements IStorageProvider {
-    private client: S3;
-    constructor() {
-      this.client = new S3({
-        region: process.env.AWS_BUCKET_REGION,
-      });
-    }
+  private client: S3;
 
-    async save(file: string, folder: string): Promise<string> {
-      const originalName = resolve(upload.tmpFolder, file);
-      const fileContent = await fs.promises.readFile(originalName);
-      const ContentType = mime.getType(originalName);
+  constructor() {
+    this.client = new S3({
+      region: process.env.AWS_BUCKET_REGION,
+    });
+  }
 
-      await this.client.putObject({
+  async save(file: string, folder: string): Promise<string> {
+    const originalName = resolve(upload.tmpFolder, file);
+
+    const fileContent = await fs.promises.readFile(originalName);
+
+    const ContentType = mime.getType(originalName);
+
+    await this.client
+      .putObject({
         Bucket: `${process.env.AWS_BUCKET}/${folder}`,
         Key: file,
         ACL: 'public-read',
         Body: fileContent,
         ContentType,
-      }).promise();
+      })
+      .promise();
 
-      await fs.promises.unlink(originalName);
-      return file;
-    }
+    await fs.promises.unlink(originalName);
 
-    async delete(file: string, folder: string): Promise<void> {
-      await this.client.deleteObject({
+    return file;
+  }
+
+  async delete(file: string, folder: string): Promise<void> {
+    await this.client
+      .deleteObject({
         Bucket: `${process.env.AWS_BUCKET}/${folder}`,
         Key: file,
-      }).promise();
-    }
+      })
+      .promise();
+  }
 }
 
 export { S3StorageProvider };
