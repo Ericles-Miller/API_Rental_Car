@@ -1,4 +1,4 @@
-import { ICreateUserDTO } from '@modules/accounts/dtos/ICreateUserdto';
+import { ICreateUserDTO } from '@modules/accounts/dtos/ICreateUserDTO';
 import { UsersRepositoryInMemory } from '@modules/accounts/Repositories/in-memory/UsersRepositoryinMemory';
 import { UsersTokensRepositoryInMemory } from '@modules/accounts/Repositories/in-memory/UsersTokensRepositoryInMemeory';
 
