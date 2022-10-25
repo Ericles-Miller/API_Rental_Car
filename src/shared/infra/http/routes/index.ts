@@ -8,6 +8,9 @@ import { rentalRoutes } from './rental.routes';
 import { specificationsRoutes } from './specification.routes';
 import { usersRoutes } from './User.routes';
 
+/* config .env */
+require('dotenv').config();
+
 const router = Router();
 
 router.use('/categories', categoriesRoutes);
