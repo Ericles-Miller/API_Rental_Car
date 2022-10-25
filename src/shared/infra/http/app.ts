@@ -7,7 +7,9 @@ import 'dotenv/config';
 import { AppError } from '@shared/errors/AppError';
 import createConnection from '@shared/infra/typeorm';
 
+// eslint-disable-next-line import-helpers/order-imports
 import upload from '@config/upload';
+
 import swaggerFile from '../../../swagger.json';
 import { router } from './routes';
 
