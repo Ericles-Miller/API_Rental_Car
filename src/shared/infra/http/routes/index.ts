@@ -8,9 +8,6 @@ import { rentalRoutes } from './rental.routes';
 import { specificationsRoutes } from './specification.routes';
 import { usersRoutes } from './User.routes';
 
-/* config .env */
-require('dotenv').config(); // nao permite mandar as chaves de seguranca aws
-
 const router = Router();
 
 router.use('/categories', categoriesRoutes);
