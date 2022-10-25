@@ -9,7 +9,7 @@ import { specificationsRoutes } from './specification.routes';
 import { usersRoutes } from './User.routes';
 
 /* config .env */
-require('dotenv').config();
+require('dotenv').config(); // nao permite mandar as chaves de seguranca aws
 
 const router = Router();
 
