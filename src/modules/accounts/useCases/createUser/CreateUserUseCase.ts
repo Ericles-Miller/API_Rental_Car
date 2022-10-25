@@ -1,4 +1,4 @@
-import { ICreateUserDTO } from '@modules/accounts/dtos/ICreateUserdto';
+import { ICreateUserDTO } from '@modules/accounts/dtos/ICreateUserDTO';
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UserRepository';
 import { IUsersRepository } from '@modules/accounts/Repositories/IUsersRepository';
 import { hash } from 'bcryptjs';
