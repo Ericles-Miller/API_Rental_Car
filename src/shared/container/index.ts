@@ -4,7 +4,7 @@ import { CarsImageRepository } from '@modules/car/infra/typeorm/repositories/Car
 import { CarsRepository } from '@modules/car/infra/typeorm/repositories/CarsRepository';
 import { CategoriesRepository } from '@modules/car/infra/typeorm/repositories/CategoriesRepository';
 import { SpecificationsRepository } from '@modules/car/infra/typeorm/repositories/SpecificationRespository';
-import { ICarsImageRepository } from '@modules/car/repositories/ICarsImageRepitory';
+import { ICarsImageRepository } from '@modules/car/repositories/ICarsImageRepository';
 import { ICarsRepository } from '@modules/car/repositories/ICarsRepository';
 import { ICategoriesRepository } from '@modules/car/repositories/ICategoriesRepository';
 import { ISpecificationRepository } from '@modules/car/repositories/ISpecificationRepository';
