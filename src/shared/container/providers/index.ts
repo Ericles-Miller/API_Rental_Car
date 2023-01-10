@@ -4,9 +4,9 @@ import { IDateProvider } from './DateProvider/IDateProvider';
 import { DayjsDateProvider } from './DateProvider/implementations/DayJsDateProvider';
 import { IMailProvider } from './MailProvider/IMailProvider';
 import { EtherealMailProvider } from './MailProvider/implementations/EtherealMailProvider';
-import { LocalStorageProvider } from './storegeProvider/implementations/LocalStorageProvider';
-import { S3StorageProvider } from './storegeProvider/implementations/S3StorageProvider';
-import { IStorageProvider } from './storegeProvider/IStorageProvider';
+import { LocalStorageProvider } from './storageProvider/implementations/LocalStorageProvider';
+import { S3StorageProvider } from './storageProvider/implementations/S3StorageProvider';
+import { IStorageProvider } from './storageProvider/IStorageProvider';
 
 container.registerSingleton<IDateProvider>(
   'DayjsDateProvider',
