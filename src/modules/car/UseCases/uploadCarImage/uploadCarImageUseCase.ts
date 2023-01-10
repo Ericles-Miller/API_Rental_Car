@@ -1,7 +1,7 @@
 import { ICarsImageRepository } from '@modules/car/repositories/ICarsImageRepository';
 import { inject, injectable } from 'tsyringe';
 
-import { IStorageProvider } from '@shared/container/providers/storegeProvider/IStorageProvider';
+import { IStorageProvider } from '@shared/container/providers/storageProvider/IStorageProvider';
 
 interface IRequest {
     car_id:string;
