@@ -8,7 +8,9 @@ class UpdateUserAvatarController {
     const { id } = request.user; // essa var id vem da tipagem que fizemos no index.d.ts
     const avatar_file = request.file.filename;
     const updateUserAvatarUseCase = container.resolve(UpdateUserAvatarUseCase);
+
     await updateUserAvatarUseCase.execute({ user_id: id, avatar_file });
+
     return response.status(204).send();
   }
 }
