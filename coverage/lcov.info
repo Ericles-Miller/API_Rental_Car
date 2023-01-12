@@ -416,11 +416,11 @@ BRH:0
 end_of_record
 TN:
 SF:src\modules\accounts\useCases\sendForgetPasswordMail\SendForgo\SendForgotPasswordMailUseCase.ts
-FN:13,SendForgetPasswordMailUseCase
+FN:13,SendForgotPasswordMailUseCase
 FN:24,execute
 FNF:2
 FNH:2
-FNDA:3,SendForgetPasswordMailUseCase
+FNDA:3,SendForgotPasswordMailUseCase
 FNDA:3,execute
 DA:1,1
 DA:2,1
