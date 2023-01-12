@@ -9,7 +9,7 @@ import { IMailProvider } from '@shared/container/providers/MailProvider/IMailPro
 import { AppError } from '@shared/errors/AppError';
 
 @injectable()
-class SendForgetPasswordMailUseCase {
+class SendForgotPasswordMailUseCase {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -23,7 +23,7 @@ class SendForgetPasswordMailUseCase {
 
   async execute(email:string): Promise<void> {
     const user = await this.usersRepository.findByEmail(email);
-    const templatePath = resolve(__dirname, '..', '..', 'views', 'email', 'ForgotPassword.hbs');
+    const templatePath = resolve(__dirname, '..', '..', 'views', 'emails', 'ForgotPassword.hbs');
 
     if (!user) {
       throw new AppError('User does not exists!');
@@ -52,4 +52,4 @@ class SendForgetPasswordMailUseCase {
   }
 }
 
-export { SendForgetPasswordMailUseCase };
+export { SendForgotPasswordMailUseCase };

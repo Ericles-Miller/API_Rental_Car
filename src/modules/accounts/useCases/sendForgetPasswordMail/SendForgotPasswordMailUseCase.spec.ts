@@ -5,9 +5,9 @@ import { DayjsDateProvider } from '@shared/container/providers/DateProvider/impl
 import { MailProviderInMemory } from '@shared/container/providers/MailProvider/inMemory/MailProviderInMemory';
 import { AppError } from '@shared/errors/AppError';
 
-import { SendForgetPasswordMailUseCase } from './SendForgo/SendForgotPasswordMailUseCase';
+import { SendForgotPasswordMailUseCase } from './SendForgo/SendForgotPasswordMailUseCase';
 
-let sendForgotPasswordMailUseCase : SendForgetPasswordMailUseCase;
+let sendForgotPasswordMailUseCase : SendForgotPasswordMailUseCase;
 let usersRepositoryInMemory : UsersRepositoryInMemory;
 let dateProvider: DayjsDateProvider;
 let usersTokensRepositoryInMemory: UsersTokensRepositoryInMemory;
@@ -19,7 +19,7 @@ describe('Send Forgot Mail', () => {
     dateProvider = new DayjsDateProvider();
     usersTokensRepositoryInMemory = new UsersTokensRepositoryInMemory();
     mailProvider = new MailProviderInMemory();
-    sendForgotPasswordMailUseCase = new SendForgetPasswordMailUseCase(
+    sendForgotPasswordMailUseCase = new SendForgotPasswordMailUseCase(
       usersRepositoryInMemory,
       usersTokensRepositoryInMemory,
       dateProvider,
