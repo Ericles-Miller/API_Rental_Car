@@ -4,7 +4,8 @@
     "experimentalDecorators": true,                   
     "emitDecoratorMetadata": true,                    
     "module": "commonjs",                                
-    "baseUrl": "./src",                                 
+    "baseUrl": "./src", 
+    "outDir": "./dist",                              
     "paths": {
         "@modules/*": ["modules/*"],
         "@config/*" : ["config/*"],
@@ -15,8 +16,7 @@
     "typeRoots": [ 
         "./src/@types",                                  
         "./node_modules/@types"],
-    "resolveJsonModule":true,                            
-    "outDir": "./dist",                                 
+    "resolveJsonModule":true,                                                            
     "esModuleInterop": true,
     "allowSyntheticDefaultImports":true,
     "forceConsistentCasingInFileNames": true,           

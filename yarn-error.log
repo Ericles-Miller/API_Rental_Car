@@ -1,30 +1,30 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\EriclesMiller\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @types/nine -D
+  C:\Program Files\nodejs\node.exe C:\Users\EriclesMiller\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @babel/cli @babel/core @babel/node @babel/plugin-propsal-class-properties @babel/plugin-proposal-decorators babel/proset-env babel-plugin-module-resolver babel-plugin-transform-typescript-metadata -D
 
 PATH: 
-  C:\Users\EriclesMiller\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\EriclesMiller\bin;C:\Program Files\PlasticSCM5\server;C:\Program Files\PlasticSCM5\client;C:\Python310\Scripts;C:\Python310;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\nodejs;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn;C:\Program Files\Microsoft SQL Server\150\Tools\Binn;C:\Program Files\Microsoft SQL Server\150\DTS\Binn;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn;C:\Program Files\Azure Data Studio\bin;C:\Program Files\dotnet;C:\Users\EriclesMiller\AppData\Local\Microsoft\WindowsApps;C:\Users\EriclesMiller\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\EriclesMiller\AppData\Roaming\npm;C:\Users\EriclesMiller\AppData\Local\GitHubDesktop\bin;C:\Program Files\Azure Data Studio\bin;C:\Users\EriclesMiller\.dotnet\tools;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+  C:\Users\EriclesMiller\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\EriclesMiller\bin;C:\Program Files\Python311\Scripts;C:\Program Files\Python311;C:\Program Files\PlasticSCM5\server;C:\Program Files\PlasticSCM5\client;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\ProgramData\chocolatey\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn;C:\Program Files\Microsoft SQL Server\150\Tools\Binn;C:\Program Files\Microsoft SQL Server\150\DTS\Binn;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn;C:\Program Files\Azure Data Studio\bin;C:\Program Files\dotnet;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Users\EriclesMiller\AppData\Local\Microsoft\WindowsApps;C:\Users\EriclesMiller\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Azure Data Studio\bin;C:\Users\EriclesMiller\.dotnet\tools;C:\Users\EriclesMiller\AppData\Roaming\npm;C:\Users\EriclesMiller\AppData\Local\GitHubDesktop\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
 
 Yarn version: 
   1.22.19
 
 Node version: 
-  16.16.0
+  18.12.0
 
 Platform: 
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fnine: Not found
-      at Request.params.callback [as _callback] (C:\Users\EriclesMiller\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
-      at Request.self.callback (C:\Users\EriclesMiller\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
-      at Request.emit (node:events:527:28)
+  Error: https://registry.yarnpkg.com/@babel%2fplugin-propsal-class-properties: Not found
+      at params.callback [as _callback] (C:\Users\EriclesMiller\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
+      at self.callback (C:\Users\EriclesMiller\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
+      at Request.emit (node:events:513:28)
       at Request.<anonymous> (C:\Users\EriclesMiller\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141862:10)
-      at Request.emit (node:events:527:28)
+      at Request.emit (node:events:513:28)
       at IncomingMessage.<anonymous> (C:\Users\EriclesMiller\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141784:12)
-      at Object.onceWrapper (node:events:641:28)
-      at IncomingMessage.emit (node:events:539:35)
-      at endReadableNT (node:internal/streams/readable:1345:12)
-      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+      at Object.onceWrapper (node:events:627:28)
+      at IncomingMessage.emit (node:events:525:35)
+      at endReadableNT (node:internal/streams/readable:1359:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
 
 npm manifest: 
   {
@@ -33,6 +33,7 @@ npm manifest:
     "description": "",
     "main": "index.js",
     "scripts": {
+      "build": "tsc",
       "test": "set NODE_ENV=test&&jest --runInBand --detectOpenHandles",
       "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only  --ignore-watch node_modules --respawn src/shared/infra/http/server.ts ",
       "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
@@ -44,21 +45,24 @@ npm manifest:
     "dependencies": {
       "-": "^0.0.1",
       "@types/nodemailer": "^6.4.6",
-      "aws-sdk": "^2.1226.0",
+      "aws-sdk": "^2.1239.0",
       "bcrypt": "^5.0.1",
       "bcryptjs": "^2.4.3",
+      "class-transformer": "^0.5.1",
       "csv": "^6.2.0",
       "csv-parse": "^5.3.0",
       "csv-parser": "^3.0.0",
       "dayjs": "^1.11.5",
+      "dotenv": "^16.0.3",
       "express": "^4.18.1",
       "express-async-errors": "^3.1.1",
       "handlebars": "^4.7.7",
       "jsonwebtoken": "^8.5.1",
+      "mime": "^3.0.0",
       "mssql": "^9.0.0",
       "multer": "^1.4.5-lts.1",
       "nine": "^0.0.1",
-      "nodemailer": "^6.7.8",
+      "nodemailer": "^6.8.0",
       "parse": "^3.4.3",
       "pg": "^8.7.3",
       "reflect-metadata": "^0.1.13",
@@ -75,6 +79,7 @@ npm manifest:
       "@types/express": "^4.17.13",
       "@types/jest": "^28.1.8",
       "@types/jsonwebtoken": "^8.5.8",
+      "@types/mime": "^3.0.1",
       "@types/multer": "^1.4.7",
       "@types/parse": "^2.18.18",
       "@types/supertest": "^2.0.12",
@@ -1144,7 +1149,7 @@ Lockfile:
     dependencies:
       "@types/node" "*"
   
-  "@types/mime@*":
+  "@types/mime@*", "@types/mime@^3.0.1":
     version "3.0.1"
     resolved "https://registry.yarnpkg.com/@types/mime/-/mime-3.0.1.tgz#5f8f2bca0a5863cb69bc0b0acd88c96cb1d4ae10"
     integrity sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==
@@ -1544,10 +1549,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
     integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
   
-  aws-sdk@^2.1226.0:
-    version "2.1226.0"
-    resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1226.0.tgz#6794d42c3c0f18df4393cda5d0de610410aa9faa"
-    integrity sha512-rlR3gPmKUZBe4sVobfKPBag+qXT6Ej+SC4ESJP87Xuz0uq4NFFY6COqYtbneIVKC8AIdg7SYY2jUR3GslrsSFQ==
+  aws-sdk@^2.1239.0:
+    version "2.1239.0"
+    resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1239.0.tgz#606e4fb0345da86db801538e13925828a9acbb31"
+    integrity sha512-746OlzNxjaMux93cTr5//WyY8t2HwRuJOO41qKDhXmklZibFDBc/3v/8CYzb1jsEYy77AO2J045+TkP9N10Wcw==
     dependencies:
       buffer "4.9.2"
       events "1.1.1"
@@ -1837,6 +1842,11 @@ Lockfile:
     version "1.2.2"
     resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-1.2.2.tgz#9f84ba3244a512f3a54e5277e8eef4c489864e40"
     integrity sha512-cOU9usZw8/dXIXKtwa8pM0OTJQuJkxMN6w30csNRUerHfeQ5R6U3kkU/FtJeIf3M202OHfY2U8ccInBG7/xogA==
+  
+  class-transformer@^0.5.1:
+    version "0.5.1"
+    resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.5.1.tgz#24147d5dffd2a6cea930a3250a677addf96ab336"
+    integrity sha512-SQa1Ws6hUbfC98vKGxZH3KFY0Y1lm5Zm0SY8XX9zbK7FJCyVEac3ATW0RIpwzW+oOfmHE5PMPufDG9hCfoEOMw==
   
   cli-highlight@^2.1.11:
     version "2.1.11"
@@ -2162,6 +2172,11 @@ Lockfile:
     integrity sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==
     dependencies:
       esutils "^2.0.2"
+  
+  dotenv@^16.0.3:
+    version "16.0.3"
+    resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.3.tgz#115aec42bac5053db3c456db30cc243a5a836a07"
+    integrity sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==
   
   dotenv@^8.2.0:
     version "8.6.0"
@@ -4081,6 +4096,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/mime/-/mime-2.6.0.tgz#a2a682a95cd4d0cb1d6257e28f83da7e35800367"
     integrity sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg==
   
+  mime@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/mime/-/mime-3.0.0.tgz#b374550dca3a0c18443b0c950a6a58f1931cf7a7"
+    integrity sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A==
+  
   mimic-fn@^2.1.0:
     version "2.1.0"
     resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-2.1.0.tgz#7ed2c2ccccaf84d3ffcb7a69b57711fc2083401b"
@@ -4228,10 +4248,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.6.tgz#8a7088c63a55e493845683ebf3c828d8c51c5503"
     integrity sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==
   
-  nodemailer@^6.7.8:
-    version "6.7.8"
-    resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.7.8.tgz#9f1af9911314960c0b889079e1754e8d9e3f740a"
-    integrity sha512-2zaTFGqZixVmTxpJRCFC+Vk5eGRd/fYtvIR+dl5u9QXLTQWGIf48x/JXvo58g9sa0bU6To04XUv554Paykum3g==
+  nodemailer@^6.8.0:
+    version "6.8.0"
+    resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.8.0.tgz#804bcc5256ee5523bc914506ee59f8de8f0b1cd5"
+    integrity sha512-EjYvSmHzekz6VNkNd12aUqAco+bOkRe3Of5jVhltqKhEsjw/y0PYPJfp83+s9Wzh1dspYAkUW/YNQ350NATbSQ==
   
   nopt@^5.0.0:
     version "5.0.0"

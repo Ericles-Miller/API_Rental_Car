@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "babel src --extensions \".js, .ts\" --out-dir dist --copy-files",
     "test": "set NODE_ENV=test&&jest --runInBand --detectOpenHandles",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only  --ignore-watch node_modules --respawn src/shared/infra/http/server.ts ",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
@@ -44,6 +45,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.18.6",
     "@types/bcryptjs": "^2.4.2",
     "@types/csv-parse": "^1.2.2",
     "@types/express": "^4.17.13",
