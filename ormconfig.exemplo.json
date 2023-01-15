@@ -1,0 +1,17 @@
+{
+    "type":"postgres",
+    "host": "localhost",
+    "username":"postgres",
+    "password":"@18er0821",
+    "port":5432,
+    "database": "rentex",
+    "entities": ["./src/modules/**/entities/*.ts"],
+    "migrations":["./src/shared/infra/typeorm/migrations/*.ts"],
+    "extra":{
+        "trustServerCertificate": true
+    },
+    "cli":{
+        "migrationsDir":"./src/shared/infra/typeorm/migrations"
+    }
+}
+
