@@ -1,9 +1,8 @@
+{
 "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "lib": [
-        "es6"
-    ],
+    "lib": ["es6"],
     "allowJs": true,
     "outDir": "build",
     "rootDir": "src",
@@ -12,25 +11,25 @@
     "strictPropertyInitialization": false,
     "baseUrl": "./",
     "paths": {
-        "@config/*": [
-            "src/config/*"
-        ],
-        "@modules/*": [
-            "src/modules/*"
-        ],
-        "@shared/*": [
-            "src/shared/*"
-        ],
-        "@errors/*": [
-            "src/errors/*"
-        ],
-        "@utils/*": [
-            "src/utils/*"
-        ]
+      "@config/*": [
+        "src/config/*"
+      ],
+      "@modules/*": [
+        "src/modules/*"
+      ],
+      "@shared/*": [
+        "src/shared/*"
+      ],
+      "@errors/*":[
+        "src/errors/*"
+      ],
+      "@utils/*":[
+         "src/utils/*"
+      ]
     },
     "typeRoots": [
-        "@types",
-        "./node_modules/@types"
+      "@types",
+      "./node_modules/@types"
     ],
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -38,13 +37,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
-"exclude": [
-    "node_modules",
-    "babel.config.js",
-    "dist",
-    "vite.config.ts",
-    "coverage",
-    "document",
-    "vite-e2e.config.ts"
-],
+  },
+  "exclude": ["node_modules","babel.config.js", "dist", "vite.config.ts", "coverage", "document", "vite-e2e.config.ts"],
 }
