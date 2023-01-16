@@ -1,25 +1,50 @@
-{
-  "compilerOptions": {
-    "target": "es2016",                                  
-    "experimentalDecorators": true,                   
-    "emitDecoratorMetadata": true,                    
-    "module": "commonjs",                                
-    "baseUrl": "./src", 
-    "outDir": "./dist",                              
+"compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": [
+        "es6"
+    ],
+    "allowJs": true,
+    "outDir": "build",
+    "rootDir": "src",
+    "strict": true,
+    "noImplicitAny": true,
+    "strictPropertyInitialization": false,
+    "baseUrl": "./",
     "paths": {
-        "@modules/*": ["modules/*"],
-        "@config/*" : ["config/*"],
-        "@shared/*" : ["shared/*"],
-        "@errors/*" : ["errors/*"],
-        "@utils/*"  : ["utils/*"]
+        "@config/*": [
+            "src/config/*"
+        ],
+        "@modules/*": [
+            "src/modules/*"
+        ],
+        "@shared/*": [
+            "src/shared/*"
+        ],
+        "@errors/*": [
+            "src/errors/*"
+        ],
+        "@utils/*": [
+            "src/utils/*"
+        ]
     },
-    "typeRoots": [ 
-        "./src/@types",                                  
-        "./node_modules/@types"],
-    "resolveJsonModule":true,                                                            
+    "typeRoots": [
+        "@types",
+        "./node_modules/@types"
+    ],
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports":true,
-    "forceConsistentCasingInFileNames": true,           
-    "skipLibCheck": true                                 
-  }
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+"exclude": [
+    "node_modules",
+    "babel.config.js",
+    "dist",
+    "vite.config.ts",
+    "coverage",
+    "document",
+    "vite-e2e.config.ts"
+],
 }
