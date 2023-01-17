@@ -23,7 +23,7 @@ jobs:
       - name: build
         run: yarn build
         
-      - uses: nogsantos/scp-deploy@master
+      - uses: appeboy/scp-actions@master
         with:
             host: ${{ secrets.ssh_host }}
             username: ${{ secrets.ssh_user }}
