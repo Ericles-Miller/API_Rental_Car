@@ -1,0 +1,36 @@
+on:
+  push:
+    branches:
+    - main
+    - Developer
+    - BackEnd
+    
+jobs: 
+  build: 
+    runs-on: ubuntu-latest
+    
+    steps: 
+      - uses: actions/checkout@v2
+      
+      - name: setup NOdeJs
+        uses: actions/setup-node@v2
+        with: 
+          node-version: v18.12.0
+          
+      - name: Install dependencies
+        run : yarn 
+        
+      - name: build
+        run: yarn build
+        
+      - uses: nogsantos/scp-deploy@master
+        with:
+            host: ${{ secrets.ssh_host }}
+            username: ${{ secrets.ssh_user }}
+            port: ${{ secrets.ssh_port }}
+            key: ${{ secrets.ssh_key }}
+            source: "., !node_modules"
+            target: "test"
+            
+        
+    
