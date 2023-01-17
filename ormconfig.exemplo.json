@@ -5,13 +5,13 @@
     "password":"@18er0821",
     "port":5432,
     "database": "rentex",
-    "entities": ["./src/modules/**/entities/*.ts"],
-    "migrations":["./src/shared/infra/typeorm/migrations/*.ts"],
+    "entities": ["./dist/modules/**/entities/*.js"],
+    "migrations":["./dist/shared/infra/typeorm/migrations/*.js"],
     "extra":{
         "trustServerCertificate": true
     },
     "cli":{
-        "migrationsDir":"./src/shared/infra/typeorm/migrations"
+        "migrationsDir":"./dist/shared/infra/typeorm/migrations"
     }
 }
 
