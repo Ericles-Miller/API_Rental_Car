@@ -1,10 +1,18 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+
+var __importDefault = void 0 && (void 0).__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 const express_1 = __importDefault(require("express"));
-const routes_1 = require("./routes");
 const app = (0, express_1.default)();
-app.get("/", routes_1.CreateCourse);
+app.get("/", (request, response) => {
+  return response.json({
+    message: "Teste"
+  });
+});
 app.listen(3333);
