@@ -10,7 +10,7 @@ jobs:
     steps: 
       - uses: actions/checkout@v2
       
-      - name: setup NOdeJs
+      - name: setup NodeJs
         uses: actions/setup-node@v2
         with: 
           node-version: v18.12.0
@@ -23,12 +23,12 @@ jobs:
         
       - uses: appleboy/scp-action@master
         with:
-            host: ${{ secrets.ssh_host }}
-            username: ${{ secrets.ssh_user }}
-            port: ${{ secrets.ssh_port }}
-            key: ${{ secrets.ssh_key }}
+            host: ${{ secrets.SSH_HOST }}
+            username: ${{ secrets.SSH_USER }}
+            port: ${{ secrets.SSH_PORT }}
+            key: ${{ secrets.SSH_KEY }}
             source: "., !node_modules"
-            target: "test-aplication"
+            target: "test-aplication-rentx-acction"
             
         
     
