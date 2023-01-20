@@ -23,7 +23,7 @@ jobs:
       - name: Build
         run: yarn build
       #comment
-      - uses: nicklasfrahm/scp-action@main
+      - uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
